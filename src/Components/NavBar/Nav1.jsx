@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export const Nav1 = () => {
   const [nav, setNav] = useState(false);
@@ -8,22 +9,40 @@ export const Nav1 = () => {
     setNav(!nav);
   };
   return (
-    <div className='h-[70px] border border-black w-full '>
-      <div className='border-2 h-full w-[95%] m-auto flex items-center justify-between'>
+    <div className='h-[70px]  w-full bg-zinc-100'>
+      <div className=' h-full w-[95%] m-auto flex items-center justify-between'>
         {/* Logo div */}
         <div>Logo</div>
 
         {/* pages content */}
-        <div className='flex gap-4'>
-          <div className='hidden md:flex border border-red gap-10'>
-            <div>Home</div>
-            <div>About</div>
-            <div>Projects</div>
-            <div>Portfolio</div>
-            <div>Contact</div>
-            <div>Blog</div>
-            <div>Login</div>
-            <div>Register</div>
+        <div className='flex gap-4 font-sans font-medium text-lg'>
+          <div className='hidden md:flex gap-10'>
+            <Link to='/'>
+              <div>Home</div>
+            </Link>
+            <Link to='/about'>
+              <div>About</div>
+            </Link>
+            <Link to='/projects'>
+              {" "}
+              <div>Projects</div>
+            </Link>
+            <Link to='/portfolio'>
+              <div>Portfolio</div>
+            </Link>
+            <Link to='/contact'>
+              <div>Contact</div>
+            </Link>
+            <Link to='/blog'>
+              {" "}
+              <div>Blog</div>
+            </Link>
+            <Link to='/login'>
+              <div>Login</div>
+            </Link>
+            <Link to='/sign'>
+              <div>Register</div>
+            </Link>
             <div>Dark</div>
           </div>
 
@@ -34,7 +53,7 @@ export const Nav1 = () => {
           <div
             className={
               nav
-                ? "fixed left-0 top-0 w-[60%] h-full flex flex-col items-center gap-4 pt-4 bg-[#a5ada5] ease-in-out duration-500 border-2 border-blue-500"
+                ? "fixed left-0 top-0 w-[60%] h-full  border-r border-r-gray-900 bg-[#000300] flex flex-col items-center gap-4 pt-4 text-white ease-in-out duration-500 border-2 border-blue-500"
                 : "ease-in-out duration-500 fixed left-[-100%]"
             }
           >
