@@ -8,6 +8,7 @@ import { Contact } from "./Contact";
 import { Projects } from "./Projects";
 import { Blog } from "./Blog";
 import { DashBoard } from "./DashBoard";
+import { Portfolio } from "./Portfolio";
 
 export const AllRoutes = () => {
   return (
@@ -19,6 +20,7 @@ export const AllRoutes = () => {
       <Route path='/contact' element={<Contact />} />
       <Route path='/projects' element={<Projects />} />
       <Route path='/blog' element={<Blog />} />
+      <Route path='/portfolio' element={<Portfolio />} />
       <Route path='/dashboard' element={<DashBoard />} />
     </Routes>
   );
