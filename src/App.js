@@ -2,12 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import { Nav } from './Components/NavBar/Nav';
 import { AllRoutes } from './Pages/AllRoutes';
+import { Contact } from './Pages/Contact';
+import { Footer } from './Pages/Footer';
 
 function App() {
   return (
     <>
-    <Nav/>
-    <AllRoutes/>
+      <Nav />
+      {/* <AllRoutes /> */}
+      <Contact />
+      <Footer/>
     </>
   );
 }
