@@ -57,7 +57,7 @@ export const Nav1 = () => {
           <div
             className={
               nav
-                ? "fixed left-0 top-0 w-[60%] h-full  border-r border-r-gray-900 bg-[#000300] flex flex-col items-center gap-4 pt-4 text-white ease-in-out duration-500"
+                ? "fixed left-0 top-0 w-[60%] h-full border-r border-r-gray-900 bg-[#000300] flex flex-col items-center gap-4 pt-4 text-white ease-in-out duration-500"
                 : "ease-in-out duration-500 fixed left-[-100%]"
             }
           >
