@@ -16,7 +16,7 @@ export const Nav1 = () => {
 
         {/* pages content */}
         <div className='flex gap-4 font-sans font-medium text-lg'>
-          <div className='hidden md:flex gap-10'>
+          <div className='hidden md:flex items-center gap-10'>
             <Link to='/'>
               <div>Home</div>
             </Link>
@@ -38,10 +38,14 @@ export const Nav1 = () => {
               <div>Blog</div>
             </Link>
             <Link to='/login'>
-              <div>Login</div>
+              <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
+                Login
+              </div>
             </Link>
             <Link to='/sign'>
-              <div>Register</div>
+              <div className='border-2 border-[#FA383E] w-24 text-center p-2 rounded-md '>
+                Register
+              </div>
             </Link>
             <div>Dark</div>
           </div>
@@ -53,7 +57,7 @@ export const Nav1 = () => {
           <div
             className={
               nav
-                ? "fixed left-0 top-0 w-[60%] h-full  border-r border-r-gray-900 bg-[#000300] flex flex-col items-center gap-4 pt-4 text-white ease-in-out duration-500 border-2 border-blue-500"
+                ? "fixed left-0 top-0 w-[60%] h-full  border-r border-r-gray-900 bg-[#000300] flex flex-col items-center gap-4 pt-4 text-white ease-in-out duration-500"
                 : "ease-in-out duration-500 fixed left-[-100%]"
             }
           >
