@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import bgPic from "../../assests/5172658.jpg";
+import bgPic from "../../assests/bg-pic.jpeg";
 import { Link } from "react-router-dom";
 import { SimpleSlider } from "../Swiper/Slider";
 
