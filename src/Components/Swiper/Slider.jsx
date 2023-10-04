@@ -24,9 +24,9 @@ export const SimpleSlider = () => {
     <>
       <div className='hidden md:flex items-center justify-center gap-10 w-[60%] m-auto mt-6'>
         {/* Previous button */}
-        <button onClick={handlePrevButtonClick}>
+        <button className='animate-bounce' onClick={handlePrevButtonClick}>
           {" "}
-          <BsFillArrowLeftCircleFill className='text-4xl text-[#2F1CA6]' />
+          <BsFillArrowLeftCircleFill className='text-4xl text-white' />
         </button>
         {/* Display your image */}
         <div className='w-[900px] h-[600px]'>
@@ -34,9 +34,9 @@ export const SimpleSlider = () => {
         </div>
 
         {/* Next button */}
-        <button onClick={handleNextButtonClick}>
+        <button className='animate-bounce' onClick={handleNextButtonClick}>
           {" "}
-          <BsFillArrowRightCircleFill className='text-4xl text-[#2F1CA6]' />
+          <BsFillArrowRightCircleFill className='text-4xl text-white' />
         </button>
       </div>
 
@@ -49,11 +49,11 @@ export const SimpleSlider = () => {
 
         <div className='w-[100%] flex justify-center gap-6'>
           {/* Previous button */}
-          <button onClick={handlePrevButtonClick}>
+          <button className='animate-bounce' onClick={handlePrevButtonClick}>
             <BsFillArrowLeftCircleFill className='text-2xl text-[#2F1CA6]' />
           </button>
           {/* Next button */}
-          <button onClick={handleNextButtonClick}>
+          <button className='animate-bounce' onClick={handleNextButtonClick}>
             <BsFillArrowRightCircleFill className='text-2xl text-[#2F1CA6]' />
           </button>
         </div>
