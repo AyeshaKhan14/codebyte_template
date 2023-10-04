@@ -10,7 +10,7 @@ export const HomeImage = () => {
       style={{
         backgroundImage: `url("https://img.freepik.com/free-vector/minimal-geometric-stripe-shape-background_1409-1014.jpg?w=1060&t=st=1696405341~exp=1696405941~hmac=c03d242d4a666359c6934ea1f699bd85a4881ade7116046cf05246cc7248996f")`,
       }}
-      className='h-full p-2 w-full'
+      className='h-full p-2 bg-cover bg-center w-full'
     >
       <div className='w-[80%] text-xs md:text-4xl md:w-1/2 text-zinc-100 m-auto text-center font-sans font-bold'>
         Elevate your coding game with our curated collection of powerful
