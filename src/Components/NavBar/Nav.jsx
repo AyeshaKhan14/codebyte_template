@@ -4,7 +4,7 @@ import { Nav2 } from "./Nav2";
 
 export const Nav = () => {
   return (
-    <div className='sticky top-0'>
+    <div>
       <Nav1 />
       <Nav2 />
     </div>

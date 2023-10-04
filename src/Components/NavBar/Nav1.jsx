@@ -37,6 +37,10 @@ export const Nav1 = () => {
               {" "}
               <div>Blog</div>
             </Link>
+            <Link to='/blog'>
+              {" "}
+              <div>Community</div>
+            </Link>
             <Link to='/login'>
               <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
                 Login
