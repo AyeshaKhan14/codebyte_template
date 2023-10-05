@@ -9,6 +9,7 @@ import { Projects } from "./Projects";
 import { Blog } from "./Blog";
 import { DashBoard } from "./DashBoard";
 import { Portfolio } from "./Portfolio";
+import AccountSetting from "../Components/Dashboard/AccountSetting";
 
 export const AllRoutes = () => {
   return (
@@ -22,6 +23,7 @@ export const AllRoutes = () => {
       <Route path='/blog' element={<Blog />} />
       <Route path='/portfolio' element={<Portfolio />} />
       <Route path='/dashboard' element={<DashBoard />} />
+      <Route path="/accountsettings" element={<AccountSetting/>}/>
     </Routes>
   );
 };
