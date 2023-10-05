@@ -1,18 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Typed from "react-typed";
+import { MdOutlineLightMode, MdOutlineNightlightRound } from "react-icons/md";
 
 export const Nav1 = () => {
   const [nav, setNav] = useState(false);
-
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
   const handleNav = () => {
     setNav(!nav);
   };
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+
+  const handleThemeSwitch = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const storedTheme = localStorage.getItem("theme");
+      if (storedTheme && storedTheme !== theme) {
+        setTheme(storedTheme);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [theme]);
+
   return (
-    <div className='h-[70px]  w-full bg-zinc-100'>
+    <div className='h-[70px]  w-full dark:bg-slate-800 dark:text-white bg-zinc-100'>
       <div className=' h-full w-[95%] m-auto flex items-center justify-between'>
         {/* Logo div */}
-        <div>Logo</div>
+        <div>
+          <Typed
+            className='text-xl md:text-2xl text-[#2F1CA6] font-bold md:pl-4 pl-2'
+            strings={["codebyte"]}
+            typeSpeed={120}
+            backSpeed={140}
+            loop
+          />
+        </div>
 
         {/* pages content */}
         <div className='flex gap-4 font-sans font-medium text-lg'>
@@ -51,7 +85,16 @@ export const Nav1 = () => {
                 Register
               </div>
             </Link>
-            <div>Dark</div>
+            <div
+              className=' dark:bg-slate-900 p-1 flex items-center cursor-pointer bg-yellow-400 justify-center rounded-full'
+              onClick={handleThemeSwitch}
+            >
+              {theme === "light" ? (
+                <MdOutlineLightMode className='text-2xl' />
+              ) : (
+                <MdOutlineNightlightRound className='text-2xl text-slate-500' />
+              )}
+            </div>
           </div>
 
           {/* responsive menu */}

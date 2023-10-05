@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -19,6 +19,14 @@ export const SimpleSlider = () => {
   const handlePrevButtonClick = () => {
     setCurrentIndex((currentIndex - 1 + imageUrls.length) % imageUrls.length);
   };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNextButtonClick();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
 
   return (
     <>
