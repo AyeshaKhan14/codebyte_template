@@ -4,7 +4,7 @@ export const Log = () => {
   return (
     <>
       {/* login div */}
-      <div className='shadow-2xl shadow-blue-500/50 w-[95%] bg-zinc-200 m-auto  h-[560px] flex items-center justify-center'>
+      <div className='dark:bg-slate-800 dark:text-white shadow-2xl shadow-blue-500/50 w-[95%] bg-zinc-200 m-auto  h-[560px] flex items-center justify-center'>
         <div className=' w-[85%] h-[500px] flex flex-col gap-6'>
           <h2 className='text-lg font-semibold'>Welcome Back</h2>
           <div>
@@ -20,20 +20,20 @@ export const Log = () => {
           </div>
 
           {/* form div */}
-          <div className='border-4'>
+          <div>
             <form className=' flex flex-col gap-6'>
               <div className=' flex flex-col gap-2'>
                 <label className='font-medium font-sans'>Your Email</label>
                 <input
                   placeholder='name@codebyte.com'
-                  className='w-full outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
+                  className='dark:bg-slate-700 dark:border-0 w-full outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
                 />
               </div>
               <div>
                 <label className='font-medium font-sans'>Your Password</label>
                 <input
                   placeholder='******'
-                  className='w-full outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
+                  className='dark:bg-slate-700 dark:border-0 w-full outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
                 />
               </div>
               <div className='mt-4'>
