@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@keyframes customAnimation {
+  0% {
+    border-color: #3e6bde; /* Start color: blue */
+    box-shadow: 0 0 10px rgba(62, 107, 222, 0.5); /* Start shadow color: blue with alpha */
+  }
+  50% {
+    border-color: #3e6bde; /* Midway color: blue */
+    box-shadow: 0 0 10px rgba(62, 107, 222, 0.5); /* Midway shadow color: blue with alpha */
+  }
+  100% {
+    border-color: #ff69b4; /* End color: pink */
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); /* End shadow color: pink with alpha */
+  }
+}
+
+.custom-animation {
+  animation: customAnimation 5s infinite;
+}
+
+/* animation */
+@keyframes fadeInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-from-bottom {
+  animation: fadeInFromBottom 0.5s ease-out;
+}

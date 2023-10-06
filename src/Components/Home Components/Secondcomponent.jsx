@@ -9,7 +9,7 @@ export const Secondcomponent = () => {
   const [token, setToken] = useState("dshj");
 
   return (
-    <div className='dark:bg-slate-800  md:h-[645px] w-full flex justify-center items-center'>
+    <div className='dark:bg-slate-800 pb-6 md:h-[645px] w-full flex justify-center items-center'>
       <div className='md:h-[600px] mt-4 w-[90%] flex gap-6  flex-col md:flex-row'>
         {token ? (
           <>

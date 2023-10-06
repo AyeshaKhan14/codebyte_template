@@ -3,14 +3,13 @@ import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
 } from "react-icons/bs";
+import s1 from "../../assests/slide/s5.jpg";
+import s2 from "../../assests/slide/s2.jpg";
+import s3 from "../../assests/slide/s4.jpg";
 
 export const SimpleSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const imageUrls = [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsqvgBq2pcWse_z6vU73ihqGv82ruc4vQ4qg&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCKmsY-TXOKpQh2CnO27NXzxNkaP5FzO41wg&usqp=CAU",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXNT6BbyhRmsM49ocZbFWqmnGbtWOAVJ6vUg&usqp=CAU",
-  ];
+  const imageUrls = [s1, s2, s3];
 
   const handleNextButtonClick = () => {
     setCurrentIndex((currentIndex + 1) % imageUrls.length);
@@ -58,11 +57,11 @@ export const SimpleSlider = () => {
         <div className='w-[100%] flex justify-center gap-6'>
           {/* Previous button */}
           <button className='animate-bounce' onClick={handlePrevButtonClick}>
-            <BsFillArrowLeftCircleFill className='text-2xl text-[#2F1CA6]' />
+            <BsFillArrowLeftCircleFill className='text-2xl text-white' />
           </button>
           {/* Next button */}
           <button className='animate-bounce' onClick={handleNextButtonClick}>
-            <BsFillArrowRightCircleFill className='text-2xl text-[#2F1CA6]' />
+            <BsFillArrowRightCircleFill className='text-2xl text-white' />
           </button>
         </div>
       </div>
