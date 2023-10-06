@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Sign = () => {
   return (
     <div className='dark:bg-slate-900 bg-zinc-100 py-4'>
       {/* sign div */}
-      <div className='dark:bg-slate-700 shadow-2xl shadow-blue-500/50 w-[90%] bg-zinc-200 m-auto md:w-[30%] h-[600px] flex items-center justify-center'>
-        <div className=' w-[85%] h-[550px] flex flex-col gap-6'>
+      <div className='dark:bg-slate-700 shadow-xl shadow-blue-500/50 w-[90%] bg-zinc-200 m-auto md:w-[30%] h-full py-4 flex items-center justify-center'>
+        <div className=' w-[85%] h-[680px] flex flex-col gap-6'>
           <h2 className='text-lg font-semibold'>Welcome Back</h2>
           <div>
             <button className='w-[100%] bg-[#FA383E] text-white p-2 rounded-md font-medium'>
@@ -22,6 +23,13 @@ export const Sign = () => {
           {/* form div */}
           <div>
             <form className=' flex flex-col gap-6'>
+              <div className=' flex flex-col gap-2'>
+                <label className='font-medium font-sans'>Username</label>
+                <input
+                  placeholder='Johe Doh'
+                  className='w-full dark:bg-slate-700 dark:border-0 dark:text-zinc-100 outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
+                />
+              </div>
               <div className=' flex flex-col gap-2'>
                 <label className='font-medium font-sans'>Your Email</label>
                 <input
@@ -50,8 +58,8 @@ export const Sign = () => {
                   Register
                 </button>
               </div>
-              <div className='dark:text-zinc-100 text-[#2F1CA6]'>
-                Already have an account?
+              <div className='dark:text-zinc-100 text-[#2F1CA6] mt-[-10px]'>
+                <Link to='/login'> Already have an account?</Link>
               </div>
             </form>
           </div>
