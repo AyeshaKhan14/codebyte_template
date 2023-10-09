@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import bgPic from "../../assests/bg-pic.jpeg";
 import { Link } from "react-router-dom";
 import { SimpleSlider } from "../Swiper/Slider";
+import { useSelector } from "react-redux";
 
 export const HomeImage = () => {
-  const [token, setToken] = useState("fjkkllk");
+  const token1 = JSON.parse(localStorage.getItem("code-token"));
+  const token2 = useSelector((state) => state.user.token);
+  const token = token1 || token2;
   return (
     <div
       style={{
@@ -36,7 +39,7 @@ export const HomeImage = () => {
         ) : (
           <Link to='/projects'>
             {" "}
-            <div className='border-2 p-3 md:px-6 rounded-md bg-[#FA383E] text-white text-center'>
+            <div className='p-3 md:px-6 rounded-md bg-[#FA383E] text-white text-center'>
               Get First Free Template
             </div>
           </Link>

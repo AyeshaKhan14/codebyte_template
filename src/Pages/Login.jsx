@@ -1,7 +1,53 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "../Redux/slices/user.slice";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (!email) {
+        toast.error("Please fill all the fields");
+        setLoading(false);
+        return;
+      }
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/auth/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
+      //console.log(data);
+      if (data.message === "User not found! Please register") {
+        toast.error("User not Exists, plz register");
+        setLoading(false);
+      } else if (data.message === "Invalid credentials") {
+        toast.error(data.message);
+        setLoading(false);
+      } else {
+        window.localStorage.setItem("code-token", JSON.stringify(data.token));
+        window.localStorage.setItem("code-user", JSON.stringify(data.user));
+        dispatch(setToken(data.token));
+        dispatch(setUser(data.user));
+        toast.success("Login Sucessfully");
+        navigate("/");
+        setLoading(false);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className='dark:bg-slate-900 bg-zinc-100 py-4'>
       {/* login div */}
@@ -22,10 +68,13 @@ export const Login = () => {
 
           {/* form div */}
           <div>
-            <form className=' flex flex-col gap-6'>
+            <form onSubmit={handleLogin} className=' flex flex-col gap-6'>
               <div className=' flex flex-col gap-2'>
                 <label className='font-medium font-sans'>Your Email</label>
                 <input
+                  type='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder='name@codebyte.com'
                   className='w-full dark:bg-slate-700 dark:text-zinc-100 dark:border-0  outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
                 />
@@ -33,12 +82,18 @@ export const Login = () => {
               <div>
                 <label className='font-medium font-sans'>Your Password</label>
                 <input
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder='******'
                   className='w-full dark:bg-slate-700 dark:border-0 dark:text-zinc-100  outline-none h-10 px-2 rounded-md border border-zinc-300 drop-shadow-2xl bg-zinc-200'
                 />
               </div>
               <div className='mt-4'>
-                <button className='w-[100%] bg-[#FA383E] text-white p-2 rounded-md font-medium'>
+                <button
+                  type='submit'
+                  className='w-[100%] bg-[#FA383E] text-white p-2 rounded-md font-medium'
+                >
                   Login
                 </button>
               </div>

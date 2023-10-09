@@ -1,14 +1,46 @@
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Typed from "react-typed";
 import { MdOutlineLightMode, MdOutlineNightlightRound } from "react-icons/md";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { clearAuth, clearToken } from "../../Redux/slices/user.slice";
+import { toast } from "react-toastify";
 
 export const Nav1 = () => {
   const [nav, setNav] = useState(false);
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "light"
   );
+  const dispatch = useDispatch();
+  const token = JSON.parse(localStorage.getItem("code-token"));
+
+  const handleLogOut = async () => {
+    // Handle Logout
+    try {
+      // Also Logout form the Server:
+      await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/logout`);
+
+      // clearing the LocalStorage:
+      localStorage.removeItem("code-token");
+      localStorage.removeItem("code-user");
+
+      navigate("/");
+
+      // Clearing the user Info from redux:
+      dispatch(clearToken());
+      dispatch(clearAuth());
+      window.location.reload();
+
+      // Toast:
+      toast.success("Logged out successfully");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const handleNav = () => {
     setNav(!nav);
   };
@@ -72,20 +104,38 @@ export const Nav1 = () => {
                 {" "}
                 <div>Blog</div>
               </Link>
-              <Link to='/blog'>
-                {" "}
-                <div>Community</div>
-              </Link>
-              <Link to='/login'>
-                <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
-                  Login
-                </div>
-              </Link>
-              <Link to='/sign'>
-                <div className='border-2 border-[#FA383E] w-24 text-center p-2 rounded-md '>
-                  Register
-                </div>
-              </Link>
+
+              {/* auth */}
+              {token ? (
+                <>
+                  {" "}
+                  <Link to='/blog'>
+                    {" "}
+                    <div>Community</div>
+                  </Link>
+                  <div
+                    onClick={handleLogOut}
+                    className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'
+                  >
+                    Logout
+                  </div>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <Link to='/login'>
+                    <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
+                      Login
+                    </div>
+                  </Link>
+                  <Link to='/sign'>
+                    <div className='border-2 border-[#FA383E] w-24 text-center p-2 rounded-md '>
+                      Register
+                    </div>
+                  </Link>
+                </>
+              )}
+
               <div
                 className=' dark:bg-slate-900 p-1 flex items-center cursor-pointer bg-yellow-400 justify-center rounded-full'
                 onClick={handleThemeSwitch}
@@ -127,13 +177,36 @@ export const Nav1 = () => {
             <Link to='/blog'>
               <div>Blog</div>
             </Link>
-            <Link to='/login'>
-              {" "}
-              <div>Login</div>
-            </Link>
-            <Link to='/register'>
-              <div>Register</div>
-            </Link>
+            {/* auth */}
+            {token ? (
+              <>
+                {" "}
+                <Link to='/blog'>
+                  {" "}
+                  <div>Community</div>
+                </Link>
+                <div
+                  onClick={handleLogOut}
+                  className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'
+                >
+                  Logout
+                </div>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link to='/login'>
+                  <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
+                    Login
+                  </div>
+                </Link>
+                <Link to='/sign'>
+                  <div className='border-2 border-[#FA383E] w-24 text-center p-2 rounded-md '>
+                    Register
+                  </div>
+                </Link>
+              </>
+            )}
             <div
               className=' dark:bg-slate-900 p-1 flex items-center cursor-pointer bg-yellow-400 justify-center rounded-full'
               onClick={handleThemeSwitch}
