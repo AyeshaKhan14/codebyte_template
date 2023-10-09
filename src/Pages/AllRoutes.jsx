@@ -10,6 +10,7 @@ import { Blog } from "./Blog";
 import { DashBoard } from "./DashBoard";
 import { Portfolio } from "./Portfolio";
 import AccountSetting from "../Components/Dashboard/AccountSetting";
+import ReactJS from "../Components/Search/ReactJS";
 
 export const AllRoutes = () => {
   return (
@@ -24,6 +25,7 @@ export const AllRoutes = () => {
       <Route path='/portfolio' element={<Portfolio />} />
       <Route path='/dashboard' element={<DashBoard />} />
       <Route path="/accountsettings" element={<AccountSetting/>}/>
+      <Route path="/react" element={<ReactJS/>}/>
     </Routes>
   );
 };
