@@ -9,7 +9,7 @@ export const FourthComponent = () => {
 
         {/* div-1-1 */}
         <div className='h-full md:h-[300px] flex flex-col md:flex-row gap-6'>
-          <div className='rounded-md fade-in-from-bottom dark:bg-slate-700 dark:text-zinc-200 bg-[#F5F7FD] w-full md:w-[50%] flex flex-col gap-4 h-full p-4'>
+          <div className='rounded-md transition duration-0 hover:duration-150 fade-in-from-bottom dark:bg-slate-700 dark:text-zinc-200 bg-[#F5F7FD] w-full md:w-[50%] flex flex-col gap-4 h-full p-4'>
             <div className='flex w-[150px] rounded-full gap-2 bg-[#FED7AA] items-center justify-center p-2'>
               <HiOutlineLightBulb className='text-2xl text-[#F97316]' />{" "}
               <span className='text-[#F97316] font-bold text-md'>Features</span>

@@ -4,14 +4,18 @@ import nodePic from "../../assests/Tech Logo/nodejs-logo.webp";
 import php from "../../assests/Tech Logo/php-logo.webp";
 import reactPic from "../../assests/Tech Logo/react-logo.webp";
 import { Log } from "../Login/Log";
+import { useSelector } from "react-redux";
 
 export const Secondcomponent = () => {
-  const [token, setToken] = useState("dshj");
+  const token1 = JSON.parse(localStorage.getItem("code-token"));
+  const token2 = useSelector((state) => state.user.token);
+  const token = token1 || token2;
+  //console.log(token);
 
   return (
     <div className='dark:bg-slate-800 pb-6 md:h-[645px] w-full flex justify-center items-center'>
       <div className='md:h-[600px] mt-4 w-[90%] flex gap-6  flex-col md:flex-row'>
-        {token ? (
+        {!token ? (
           <>
             <div className='h-full w-full flex flex-col gap-6 md:w-[60%]'>
               {/* div-1 */}
