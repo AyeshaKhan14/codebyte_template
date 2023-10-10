@@ -73,7 +73,7 @@ export const Nav1 = () => {
           {/* Logo div */}
           <div>
             <Typed
-              className='text-xl md:text-2xl text-[#2F1CA6] font-bold md:pl-4 pl-2'
+              className='text-xl md:text-2xl lg:text-xl text-[#2F1CA6] font-bold md:pl-4 pl-2'
               strings={["codebyte"]}
               typeSpeed={120}
               backSpeed={140}

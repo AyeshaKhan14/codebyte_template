@@ -9,8 +9,11 @@ import { Projects } from "./Projects";
 import { Blog } from "./Blog";
 import { DashBoard } from "./DashBoard";
 import { Portfolio } from "./Portfolio";
-import AccountSetting from "../Components/Dashboard/AccountSetting";
 import ReactJS from "../Components/Search/ReactJS";
+import { Blogs } from "../Components/Dashboard Components/Blog";
+import { PostPortfolio } from "../Components/Dashboard Components/Post-Portfolio";
+import { Account } from "../Components/Dashboard Components/Account";
+import { Profile } from "./Profile";
 
 export const AllRoutes = () => {
   return (
@@ -22,10 +25,13 @@ export const AllRoutes = () => {
       <Route path='/contact' element={<Contact />} />
       <Route path='/projects' element={<Projects />} />
       <Route path='/blog' element={<Blog />} />
+      <Route path='/blog-post' element={<Blogs />} />
       <Route path='/portfolio' element={<Portfolio />} />
+      <Route path='/portfolio-post' element={<PostPortfolio />} />
       <Route path='/dashboard' element={<DashBoard />} />
-      <Route path="/accountsettings" element={<AccountSetting/>}/>
-      <Route path="/react" element={<ReactJS/>}/>
+      <Route path='/userprofile' element={<Profile />} />
+      <Route path='/accountsettings' element={<Account />} />
+      <Route path='/react' element={<ReactJS />} />
     </Routes>
   );
 };
