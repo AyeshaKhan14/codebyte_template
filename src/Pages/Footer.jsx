@@ -72,7 +72,7 @@ export const Footer = () => {
             <span className='text-sm text-gray-500 sm:text-center dark:text-gray-400'>
               © 2018-2023{" "}
               <a className='' href='/contact#'>
-                snipbyte™
+                codebyte™
               </a>
               . All Rights Reserved.
             </span>

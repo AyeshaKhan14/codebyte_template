@@ -94,7 +94,7 @@ export const Login = () => {
                   type='submit'
                   className='w-[100%] bg-[#FA383E] text-white p-2 rounded-md font-medium'
                 >
-                  Login
+                  {loading ? <p>Please Wait</p> : <p>Login</p>}
                 </button>
               </div>
               <div className='dark:text-zinc-100 text-[#2F1CA6]'>
