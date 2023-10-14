@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import { Home } from "./Home";
 import { Login } from "./Login";
 import { Sign } from "./Sign";
@@ -9,13 +9,16 @@ import { Projects } from "./Projects";
 import { Blog } from "./Blog";
 import { DashBoard } from "./DashBoard";
 import { Portfolio } from "./Portfolio";
-import ReactJS from "../Components/Search/ReactJS";
+import ReactJS, { Search } from "../Components/Search/Search";
 import { Blogs } from "../Components/Dashboard Components/Blog";
 import { PostPortfolio } from "../Components/Dashboard Components/Post-Portfolio";
 import { Account } from "../Components/Dashboard Components/Account";
 import { Profile } from "./Profile";
+import { Community } from "./Community";
+import { SingleComminity } from "../Components/Community/SingleComminity";
 
 export const AllRoutes = () => {
+  const user = JSON.parse(localStorage.getItem("code-user")) || {};
   return (
     <Routes>
       <Route path='/' element={<Home />} />
@@ -29,9 +32,11 @@ export const AllRoutes = () => {
       <Route path='/portfolio' element={<Portfolio />} />
       <Route path='/portfolio-post' element={<PostPortfolio />} />
       <Route path='/dashboard' element={<DashBoard />} />
-      <Route path='/userprofile' element={<Profile />} />
+      <Route path={`/userprofile/${user?.email}`} element={<Profile />} />
       <Route path='/accountsettings' element={<Account />} />
-      <Route path='/react' element={<ReactJS />} />
+      <Route path='/community' element={<Community />} />
+      <Route path='/community/:id' element={<SingleComminity />} />
+      <Route path={`projects/:search`} element={<Search />} />
     </Routes>
   );
 };

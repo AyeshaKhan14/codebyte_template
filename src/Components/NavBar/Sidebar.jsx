@@ -13,7 +13,7 @@ const Sidebar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const user = JSON.parse(localStorage.getItem("code-user")) || {};
   const token = JSON.parse(localStorage.getItem("code-token"));
 
   const handleLogOut = async () => {
@@ -190,19 +190,26 @@ const Sidebar = () => {
 
           <div className=' flex flex-col gap-4 my-2'>
             <div className='flex justify-between bg-gradient-to-r from-purple-700 to-indigo-500  text-white text-[13px] font-[600] rounded-lg p-3'>
-              <a href='/profile'>View Profile</a>
+              {user?.email && (
+                <Link to={`/userprofile/${user.email}`}>View Profile</Link>
+              )}{" "}
             </div>
             <div className='flex items-center p-2 text-[14px] font-[600] dark:bg-darkCard bg-lightCard gap-2 rounded-lg'>
               <span className='flex justify-between bg-gradient-to-r from-purple-700 to-indigo-500  text-white px-3 py-2 rounded-full'>
-                A
+                {user?.name
+                  ? user.name
+                      .split(" ")
+                      .map((word) => word.charAt(0).toUpperCase())
+                      .join("")
+                  : ""}
               </span>
               <div>
                 <span className='text-gray-500 dark:text-white'>
-                  Ayesha Khan
+                  {user?.name}
                 </span>
                 <br />
                 <span className='text-gray-500 dark:text-white text-xs font-medium'>
-                  tofosa2228@gronasu.com
+                  {user?.email}
                 </span>
               </div>
             </div>
@@ -231,16 +238,25 @@ const Sidebar = () => {
           </div>
         </div>
         {/* 2nd div */}
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center p-2 gap-4'>
           <Link to='/blog-post'>
             <div>Blog</div>
           </Link>
           <Link to='/portfolio-post'>
             <div>Portfolio</div>
           </Link>
-          <Link to='/profile'>
-            <div className='border-2 rounded-full h-[35px] w-[35px]'>user</div>
-          </Link>
+          {user?.email && (
+            <Link to={`/userprofile/${user.email}`}>
+              <div className='text-red-600 font-bold bg-gray-300 flex items-center justify-center h-[30px] w-[30px] rounded-full'>
+                {user?.name
+                  ? user.name
+                      .split(" ")
+                      .map((word) => word.charAt(0).toUpperCase())
+                      .join("")
+                  : ""}
+              </div>
+            </Link>
+          )}{" "}
         </div>
       </div>
     </>

@@ -67,7 +67,7 @@ const AccountSetting = () => {
       <div className='dark:bg-midnightBlack bg-white'>
         <div className='p-5'>
           <div className='mb-4'>
-            <div className='rounded-2xl dark:bg-darkCard bg-lightCard'>
+            <div className='bg-lightcard rounded-2xl dark:bg-darkCard bg-lightCard'>
               <h2 className='md:p-5 md:text-xl text-lg p-2 dark:text-white text-gray-950'>
                 Profile
               </h2>
@@ -76,10 +76,7 @@ const AccountSetting = () => {
                 <div className='md:p-5 p-3'>
                   <div className='my-2 md:flex'>
                     <div className='md:mr-3 md:w-1/2 w-full mb-4'>
-                      <label
-                        htmlFor='firstName'
-                        className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                      >
+                      <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
                         First Name
                       </label>
                       <input
@@ -93,10 +90,7 @@ const AccountSetting = () => {
                       />
                     </div>
                     <div className='md:mr-3 md:w-1/2 w-full mb-4'>
-                      <label
-                        htmlFor='lastName'
-                        className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                      >
+                      <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
                         Last Name
                       </label>
                       <input
@@ -112,27 +106,16 @@ const AccountSetting = () => {
                   </div>
                   <div className='mb-2 md:flex'>
                     <div className='md:mr-3 md:w-1/2 w-full mb-4'>
-                      <label
-                        htmlFor='email'
-                        className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                      >
+                      <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
                         Email
                       </label>
                       <input
-                        type='email'
-                        name='email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
                         className='bg-white border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-midnightBlack dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  focus:outline-none'
                         placeholder='tofosa2228@gronasu.com'
-                        disabled=''
                       />
                     </div>
                     <div className='md:mr-3 md:w-1/2 w-full mb-4'>
-                      <label
-                        htmlFor='phoneNumber'
-                        className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                      >
+                      <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
                         Phone Number
                       </label>
                       <input
@@ -175,9 +158,9 @@ const AccountSetting = () => {
               </form>
             </div>
           </div>
-          <div className='mb-4'>
-            <div className='rounded-2xl dark:bg-darkCard bg-lightCard'>
-              <div className='md:p-5 p-3 flex items-center justify-between'>
+          <div className='mb-4 bg-lightcard'>
+            <div className='rounded-2xl  dark:bg-darkCard bg-lightCard'>
+              <div className='md:p-5 p-3  flex items-center justify-between'>
                 <h2 className='md:text-xl text-lg p-2 dark:text-white text-gray-950'>
                   Password
                 </h2>
@@ -189,7 +172,7 @@ const AccountSetting = () => {
                 </button>
               </div>
               {isPasswordFormVisible && (
-                <form onSubmit={handlePasswordUpdate}>
+                <form className='p-4 ' onSubmit={handlePasswordUpdate}>
                   <div className='mb-2 md:flex'>
                     <div className='md:mr-3 md:w-1/2 w-full mb-4'>
                       <input
@@ -197,7 +180,7 @@ const AccountSetting = () => {
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         placeholder='Current Password'
-                        className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                        className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                         required
                       />
                     </div>
@@ -207,7 +190,7 @@ const AccountSetting = () => {
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         placeholder='New Password'
-                        className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                        className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                         required
                       />
                     </div>
@@ -218,7 +201,7 @@ const AccountSetting = () => {
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder='Confirm Password'
-                      className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                       required
                     />
                   </div>
@@ -232,7 +215,7 @@ const AccountSetting = () => {
               )}
             </div>
           </div>
-          <div className='mb-4'>
+          <div className='mb-4 bg-lightcard'>
             <div className='rounded-2xl dark:bg-darkCard bg-lightCard'>
               <div className='md:p-5 p-3 flex items-center justify-between'>
                 <h2 className='md:text-xl text-lg p-2 dark:text-white text-gray-950'>
@@ -246,7 +229,7 @@ const AccountSetting = () => {
                 </button>
               </div>
               {isSocialInfoVisible && (
-                <form onSubmit={handleSocialInfoUpdate}>
+                <form className='p-4 ' onSubmit={handleSocialInfoUpdate}>
                   <div className='mb-2'>
                     <input
                       type='text'
@@ -258,7 +241,7 @@ const AccountSetting = () => {
                         })
                       }
                       placeholder='Facebook URL'
-                      className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
                   </div>
                   <div className='mb-2'>
@@ -272,7 +255,7 @@ const AccountSetting = () => {
                         })
                       }
                       placeholder='Instagram URL'
-                      className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
                   </div>
                   <div className='mb-2'>
@@ -286,7 +269,7 @@ const AccountSetting = () => {
                         })
                       }
                       placeholder='YouTube URL'
-                      className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
                   </div>
                   <div className='mb-2'>
@@ -300,7 +283,7 @@ const AccountSetting = () => {
                         })
                       }
                       placeholder='LinkedIn URL'
-                      className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
                   </div>
                   <div className='mb-2'>
@@ -311,7 +294,7 @@ const AccountSetting = () => {
                         setSocialInfo({ ...socialInfo, github: e.target.value })
                       }
                       placeholder='GitHub URL'
-                      className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
                   </div>
                   <button
