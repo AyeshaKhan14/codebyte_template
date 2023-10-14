@@ -68,7 +68,7 @@ export const Nav1 = () => {
 
   return (
     <>
-      <div className='h-[70px]  w-full dark:bg-slate-800 dark:text-white bg-zinc-100'>
+      <div className='h-[70px]  w-full dark:bg-slate-800  dark:text-white bg-zinc-100'>
         <div className=' h-full w-[95%] m-auto flex items-center justify-between'>
           {/* Logo div */}
           <div>
@@ -85,37 +85,37 @@ export const Nav1 = () => {
           <div className='flex gap-4 font-sans font-medium text-lg'>
             <div className='hidden md:flex items-center gap-10'>
               <Link to='/'>
-                <div>Home</div>
+                <div className='hover:text-[#FA383E]'>Home</div>
               </Link>
               <Link to='/about'>
-                <div>About</div>
+                <div className='hover:text-[#FA383E]'>About</div>
               </Link>
               <Link to='/projects'>
                 {" "}
-                <div>Projects</div>
+                <div className='hover:text-[#FA383E]'>Projects</div>
               </Link>
               <Link to='/portfolio'>
-                <div>Portfolio</div>
+                <div className='hover:text-[#FA383E]'>Portfolio</div>
               </Link>
               <Link to='/contact'>
-                <div>Contact</div>
+                <div className='hover:text-[#FA383E]'>Contact</div>
               </Link>
               <Link to='/blog'>
                 {" "}
-                <div>Blog</div>
+                <div className='hover:text-[#FA383E]'>Blog</div>
               </Link>
 
               {/* auth */}
               {token ? (
                 <>
                   {" "}
-                  <Link to='/blog'>
+                  <Link to='/community'>
                     {" "}
-                    <div>Community</div>
+                    <div className='hover:text-[#FA383E]'>Community</div>
                   </Link>
                   <div
                     onClick={handleLogOut}
-                    className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'
+                    className='p-2 bg-[#FA383E] cursor-pointer hover:bg-red-400 py-2 text-white rounded-md'
                   >
                     Logout
                   </div>
@@ -124,7 +124,7 @@ export const Nav1 = () => {
                 <>
                   {" "}
                   <Link to='/login'>
-                    <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
+                    <div className='p-2 bg-[#FA383E] py-2 text-white rounded-md'>
                       Login
                     </div>
                   </Link>
@@ -160,34 +160,34 @@ export const Nav1 = () => {
         <div className='w-full  dark:bg-slate-700 dark:text-zinc-100 p-4'>
           <div className='w-[60%] m-auto flex flex-col font-medium text-lg gap-2 justify-center items-center'>
             <Link to='/'>
-              <div>Home</div>
+              <div className='hover:text-[#FA383E]'>Home</div>
             </Link>
             <Link to='/about'>
-              <div>About</div>
+              <div className='hover:text-[#FA383E]'>About</div>
             </Link>
             <Link to='/projects'>
-              <div>Projects</div>
+              <div className='hover:text-[#FA383E]'>Projects</div>
             </Link>
             <Link to='/portfolio'>
-              <div>Portfolio</div>
+              <div className='hover:text-[#FA383E]'>Portfolio</div>
             </Link>
             <Link to='/contact'>
-              <div>Contact</div>
+              <div className='hover:text-[#FA383E]'>Contact</div>
             </Link>
             <Link to='/blog'>
-              <div>Blog</div>
+              <div className='hover:text-[#FA383E]'>Blog</div>
             </Link>
             {/* auth */}
             {token ? (
               <>
                 {" "}
-                <Link to='/blog'>
+                <Link to='/community'>
                   {" "}
-                  <div>Community</div>
+                  <div className='hover:text-[#FA383E]'>Community</div>
                 </Link>
                 <div
                   onClick={handleLogOut}
-                  className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'
+                  className='hover:text-red-400 p-2 bg-[#FA383E] py-2 text-white rounded-md'
                 >
                   Logout
                 </div>
@@ -196,7 +196,7 @@ export const Nav1 = () => {
               <>
                 {" "}
                 <Link to='/login'>
-                  <div className='border p-2 bg-[#FA383E] py-2 text-white rounded-md'>
+                  <div className='p-2 bg-[#FA383E] py-2 text-white rounded-md'>
                     Login
                   </div>
                 </Link>

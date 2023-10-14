@@ -3,7 +3,7 @@ import { AiOutlineUser } from "react-icons/ai";
 
 export const FifthComponent = () => {
   return (
-    <div className='w-full h-full md:h-[600px]  dark:bg-midnightBlack flex flex-col gap-2 md:p-12'>
+    <div className='w-full h-full md:h-[600px] p-4 dark:bg-midnightBlack flex flex-col gap-2 md:p-12'>
       {/* 1st div */}
       <div className=' w-[90%] md:w-[35%] text-4xl flex flex-col gap-2 m-auto'>
         <h1 className='text-center dark:text-zinc-100 font-bold md:text-5xl font-sans'>
@@ -17,7 +17,7 @@ export const FifthComponent = () => {
       {/* 2nd div */}
       <div className=' w-[90%] h-full md:w-[80%] m-auto flex flex-col items-center justify-between md:flex-row gap-4'>
         {/* 1st chid div */}
-        <div className='w-full md:w-[50%] dark:bg-slate-800 dark:text-zinc-200 h-[270px] bg-[#F5F7FD] flex justify-center items-center  border rounded-md border-gray-300'>
+        <div className='w-full md:w-[50%] dark:bg-slate-800 dark:text-zinc-200 h-auto p-2 md:h-[270px] bg-[#F5F7FD] flex justify-center items-center dark:border-0 border rounded-md border-gray-300'>
           <div className='w-[95%] h-[90%]  flex flex-col gap-4'>
             <div className='flex justify-between text-sm font-medium text-gray-600'>
               <p>Information</p>
@@ -40,7 +40,7 @@ export const FifthComponent = () => {
           </div>
         </div>
         {/* 2st chid div */}
-        <div className='w-full md:w-[50%] dark:bg-slate-800 dark:text-zinc-200  h-[300px] md:h-[270px] bg-[#F5F7FD] rounded-md flex justify-center items-center border border-gray-300'>
+        <div className='w-full md:w-[50%] dark:bg-slate-800 dark:text-zinc-200  h-auto p-2 md:h-[270px] bg-[#F5F7FD] rounded-md flex justify-center items-center dark:border-0  border border-gray-300'>
           <div className='w-[95%] h-[90%] flex flex-col gap-4'>
             <div className='flex justify-between text-sm font-medium text-gray-600'>
               <p>Educational</p>

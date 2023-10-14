@@ -53,7 +53,7 @@ export const ProjectsDashboard = () => {
                     type='text'
                     id='projectUrl'
                     className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-slate-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
-                    placeholder='https://www.snipbyte.com'
+                    placeholder='https://www.codebyte.com'
                   />
                   <div className='text-xs font-light text-indigo-500'>
                     This is not required but it will add a good impression
@@ -96,30 +96,7 @@ export const ProjectsDashboard = () => {
                   This is not required but it will add a good impression
                 </div>
               </div>
-              <div className='w-1/2'>
-                <label
-                  for='attributes'
-                  className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                >
-                  Insert Attributes
-                </label>
-                <select
-                  id='attributes'
-                  className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-slate-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
-                >
-                  <option disabled=''>Choose a language</option>
-                  <option value='<code lang="html"> </code>'>Html</option>
-                  <option value='<code lang="javascript"> </code>'>
-                    JavaScript
-                  </option>
-                  <option value='<code lang="php"> </code>'>PHP</option>
-                  <option value='<code lang="css"> </code>'>CSS</option>
-                  <option value='(h1) (/h1)'>Heading 1</option>
-                  <option value='(h2) (/h2)'>Heading 2</option>
-                  <option value='(ul)  (/ul)'>Add list</option>
-                  <option value="(Link to='#')  (/Link)">Add Link</option>
-                </select>
-              </div>
+
               <div className=''>
                 <label
                   for='description'
