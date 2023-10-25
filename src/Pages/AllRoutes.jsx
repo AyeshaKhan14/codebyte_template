@@ -16,6 +16,7 @@ import { Account } from "../Components/Dashboard Components/Account";
 import { Profile } from "./Profile";
 import { Community } from "./Community";
 import { SingleComminity } from "../Components/Community/SingleComminity";
+import { ProjectSinglePage } from "./ProjectSinglePage";
 
 export const AllRoutes = () => {
   const user = JSON.parse(localStorage.getItem("code-user")) || {};
@@ -36,6 +37,7 @@ export const AllRoutes = () => {
       <Route path='/accountsettings' element={<Account />} />
       <Route path='/community' element={<Community />} />
       <Route path='/community/:id' element={<SingleComminity />} />
+      <Route path='/projects/:id' element={<ProjectSinglePage />} />
       <Route path={`projects/:search`} element={<Search />} />
     </Routes>
   );

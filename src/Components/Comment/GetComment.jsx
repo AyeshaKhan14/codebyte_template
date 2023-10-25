@@ -5,8 +5,10 @@ import { toast } from "react-toastify";
 import { PostComment } from "./PostComment";
 import { useDispatch } from "react-redux";
 import { setComment } from "../../Redux/slices/comment.slice";
+import { useParams } from "react-router-dom";
 
 export const GetComment = () => {
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const user = JSON.parse(localStorage.getItem("code-user")) || {};
@@ -28,14 +30,15 @@ export const GetComment = () => {
   const handleDel = async (id) => {
     try {
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}/comments/${id}`,
+        `${process.env.REACT_APP_BASE_URL}/community/comment/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Add the Authorization header with the token
           },
         }
       );
-      if (data.message === "Comment deleted") {
+      // console.log(data, "del");
+      if (data.message === "Comment deleted successfully") {
         getAllComment();
         toast.success("Comment Deleted");
       }
@@ -49,14 +52,19 @@ export const GetComment = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/comments`
+        `${process.env.REACT_APP_BASE_URL}/community/${id}`
       );
-      // console.log(data.comments);
-      setData(data.comments);
+      const sortedComments = data.community?.comments?.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+
+      setData(sortedComments || []);
+      dispatch(setComment(sortedComments));
     } catch (err) {
       console.log(err);
     }
   };
+
   const timeAgo = (timestamp) => {
     const currentTime = new Date();
     const postTime = new Date(timestamp);
@@ -78,16 +86,12 @@ export const GetComment = () => {
     }
   };
 
-  const sortedData = data.slice().sort((a, b) => {
-    return new Date(b.createdAt) - new Date(a.createdAt);
-  });
-
   useEffect(() => {
     getAllComment();
-  }, []);
+  }, [id]);
   return (
     <div className='flex flex-col gap-4'>
-      {sortedData?.map((el) => (
+      {data.map((el) => (
         <div key={el._id} className='p-4 rounded-md bg-gray-100'>
           <div className='flex justify-between'>
             <div className='flex items-center gap-2'>

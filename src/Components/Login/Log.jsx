@@ -18,8 +18,14 @@ export const Log = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (!email) {
-        toast.error("Please fill all the fields");
+      if (!email || !password) {
+        toast.error("Please fill in all the fields");
+        setLoading(false);
+        return;
+      }
+
+      if (password.length < 8) {
+        toast.error("Password must be at least 8 characters");
         setLoading(false);
         return;
       }

@@ -99,7 +99,7 @@ export const GetCommunity = () => {
       {sortedData.map((el) => (
         <div
           key={el._id}
-          className='hover:scale-110 transition duration-700 ease-in-out w-full h-auto flex flex-col gap-2 p-4 px-6 dark:bg-slate-700 hover:duration-150 dark:text-zinc-100 bg-[#F5F7FD] rounded-md'
+          className='hover:scale-100 transition duration-700 ease-in-out w-full h-auto flex flex-col gap-2 p-4 px-6 dark:bg-slate-700 hover:duration-150 dark:text-zinc-100 bg-[#F5F7FD] rounded-md'
         >
           <div className='flex items-center justify-between'>
             <h1 className='font-bold md:text-2xl'>{el.title}</h1>
