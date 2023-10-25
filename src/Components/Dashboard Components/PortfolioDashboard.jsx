@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const PortfolioDashboard = () => {
   const [imgs, setImgs] = useState([]);
@@ -37,20 +38,20 @@ export const PortfolioDashboard = () => {
     }
   };
 
+  console.log(selectedTech, "port-tech");
   const handlePostPortfolio = async (e) => {
     e.preventDefault();
-    const form = new FormData();
     try {
-      form.append("image", images);
-      form.append("title", title);
-      form.append("description", des);
-      form.append("liveProjectLink", liveurl);
-      form.append("techStack", selectedTech);
       const token = JSON.parse(localStorage.getItem("code-token")) || null;
-
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/portfolio`,
-        form,
+        {
+          image: images,
+          title: title,
+          description: des,
+          liveProjectLink: liveurl,
+          techStack: selectedTech,
+        },
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -58,7 +59,10 @@ export const PortfolioDashboard = () => {
           },
         }
       );
-      //console.log(data, "port-done");
+      console.log(data, "port-done");
+      if (data) {
+        toast.success("Portfolio Posted Successfully");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -69,8 +73,8 @@ export const PortfolioDashboard = () => {
   }, []);
 
   return (
-    <div className='border w-full'>
-      <div className='dark:bg-midnightBlack bg-white dark:text-white text-gray-950'>
+    <div className='border dark:border-0 w-full'>
+      <div className='dark:bg-midnightBlack dark:border-0  bg-white dark:text-white text-gray-950'>
         <div className='p-2'>
           <div className='w-full p-2 lg:p-4 mx-auto dark:bg-slate-800 rounded-lg md:my-4 bg-lightcard'>
             <form

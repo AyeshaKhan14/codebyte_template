@@ -3,35 +3,34 @@ import React from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { GetComment } from "./GetComment";
-import { useDispatch } from "react-redux";
-import { setComment } from "../../Redux/slices/comment.slice";
+import { useDispatch, useSelector } from "react-redux";
 
-export const PostComment = ({ post }) => {
+export const PostComment = ({ post, getSingleCommunity }) => {
   const [title, setTitle] = useState("");
   const user = JSON.parse(localStorage.getItem("code-user")) || {};
   const token = JSON.parse(localStorage.getItem("code-token")) || null;
-  const dispatch = useDispatch();
+  const comemnt = useSelector((state) => state.comment.comment);
+
   const handlePostCommt = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/comments`,
+        `${process.env.REACT_APP_BASE_URL}/community/comment`,
         {
+          communityPostId: post,
           text: title,
-          post: post,
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-      //console.log(data);
-      if (data.message === "Comment created successfully") {
+
+      if (data.comment) {
         toast.success("Comment Added");
         setTitle("");
-        // dispatch(setComment(data.comments));
-        // console.log(setComment(data.comments));
+        getSingleCommunity();
       }
     } catch (err) {
       console.log(err);
@@ -40,7 +39,9 @@ export const PostComment = ({ post }) => {
 
   return (
     <div className=' flex flex-col gap-4'>
-      <h1 className='font-medium text-xl md:text-2xl'>Discussion (3)</h1>
+      <h1 className='font-medium text-xl md:text-2xl'>
+        Discussion ({comemnt.length})
+      </h1>
       <div>
         <form onSubmit={handlePostCommt} className='flex flex-col gap-4'>
           <div className='flex flex-col gap-2'>

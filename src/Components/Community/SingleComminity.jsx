@@ -6,18 +6,22 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { PostComment } from "../Comment/PostComment";
+import { Loading } from "../Loading/Loading";
 
 export const SingleComminity = () => {
   const { id } = useParams();
   const [data, setData] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const getSingleCommunity = async () => {
+    setLoading(true);
     try {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/community/${id}`
       );
-      //console.log(data.community);
+      //console.log(data.community, "sin");
       setData(data.community);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -26,6 +30,11 @@ export const SingleComminity = () => {
   useEffect(() => {
     getSingleCommunity();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className='w-full dark:bg-slate-800 h-full flex justify-center gap-4'>
       {/* div-1 */}
@@ -36,7 +45,7 @@ export const SingleComminity = () => {
         </div>
 
         {/* post comment */}
-        <PostComment post={data._id} />
+        <PostComment post={data._id} getSingleCommunity={getSingleCommunity} />
       </div>
 
       {/* 2nd div */}
