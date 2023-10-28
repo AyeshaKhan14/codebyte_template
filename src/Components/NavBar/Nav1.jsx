@@ -15,7 +15,7 @@ export const Nav1 = () => {
     () => localStorage.getItem("theme") || "light"
   );
   const dispatch = useDispatch();
-  const token = JSON.parse(localStorage.getItem("code-token"));
+  const token = JSON.parse(localStorage.getItem("code-token")) || "";
 
   const handleLogOut = async () => {
     // Handle Logout

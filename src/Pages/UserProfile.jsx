@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   BsFacebook,
   BsTwitter,
@@ -9,49 +9,40 @@ import {
   BsLinkedin,
   BsInstagram,
 } from "react-icons/bs";
-import { Link } from "react-router-dom";
 
-export const Profile = () => {
+export const UserProfile = () => {
   const [protog, setProTog] = useState(true);
   const [blgtog, setBlgTog] = useState(false);
   const [userDetail, setUserDetail] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [userPro, setUserPro] = useState([]);
-  const user = JSON.parse(localStorage.getItem("code-user")) || {};
   const token = JSON.parse(localStorage.getItem("code-token")) || null;
-  const handleTog = () => {
-    setProTog(!protog);
-    setBlgTog(false);
-  };
-
-  const handleBlogTog = () => {
-    setBlgTog(!blgtog);
-    setProTog(false);
-  };
+  const { id } = useParams();
+  const [userPro, setUserPro] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getUser = async () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/u/${user?._id}`,
+        `${process.env.REACT_APP_BASE_URL}/u/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`, // Add the Authorization header with the token
           },
         }
       );
-      // console.log(data.user, "det");
+      console.log(data.user, "det");
       setUserDetail(data.user);
       setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
+
   const geUserProject = async () => {
     setLoading(true);
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/projects/q?userId=${user?._id}`
+        `${process.env.REACT_APP_BASE_URL}/projects/q?userId=${id}`
       );
       // console.log(data.project, "pro");
       setUserPro(data.project);
@@ -61,9 +52,18 @@ export const Profile = () => {
     }
   };
   useEffect(() => {
-    getUser();
     geUserProject();
+    getUser();
   }, []);
+  const handleTog = () => {
+    setProTog(true);
+    setBlgTog(false);
+  };
+
+  const handleBlogTog = () => {
+    setBlgTog(!blgtog);
+    setProTog(false);
+  };
 
   return (
     <div className=' dark:bg-midnightBlack dark:text-white w-full h-full'>
@@ -84,6 +84,7 @@ export const Profile = () => {
               <p>{userDetail?.introduction}</p>
             </div>
           </div>
+
           <div className=' flex items-center gap-4'>
             <button className='border p-2 font-medium px-4 rounded-md'>
               View Portfolio
@@ -93,13 +94,14 @@ export const Profile = () => {
             </button>
           </div>
         </div>
+
         {/* social icons and likes */}
         <div className='flex flex-col gap-2 md:flex-row items-start justify-start md:justify-between'>
           <div>
             {userDetail?.socials?.length === 0 ? (
               ""
             ) : (
-              <div className='flex gap-1 justify-between '>
+              <div className='flex justify-between gap-1'>
                 {userDetail?.socials?.map((el, i) => {
                   return (
                     <div className='flex justify-start'>
@@ -163,7 +165,7 @@ export const Profile = () => {
                         {el.name === "Instagram" ? (
                           <BsInstagram
                             onClick={() => window.open(el.link)}
-                            className='font-bold cursor-pointer text-[#feda75] md:text-3xl'
+                            className='font-bold cursor-pointer text-blue-500 md:text-3xl'
                           />
                         ) : (
                           ""
@@ -192,12 +194,15 @@ export const Profile = () => {
             </div>
           </div>
         </div>
-
         {/* div-2 */}
         <div className='flex flex-col gap-2'>
           <div className=' flex justify-center gap-10'>
-            <div onClick={handleTog}>Projects</div>
-            <div onClick={handleBlogTog}>Blogs</div>
+            <div className='cursor-pointer' onClick={handleTog}>
+              Projects
+            </div>
+            <div className='cursor-pointer' onClick={handleBlogTog}>
+              Blogs
+            </div>
           </div>
           <div className='text-center text-gray-600'>
             Some of my recent work.

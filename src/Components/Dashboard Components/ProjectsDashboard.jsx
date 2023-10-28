@@ -39,6 +39,9 @@ export const ProjectsDashboard = () => {
     setTechStack(stack);
   };
 
+  const handleEditorChange = (content) => {
+    setDes(content);
+  };
   const handleProject = async (e) => {
     e.preventDefault();
     // const form = new FormData();
@@ -77,7 +80,7 @@ export const ProjectsDashboard = () => {
           },
         }
       );
-      //console.log(data.project, "project-done");
+      console.log(data.project, "project-done");
       if (data.project) {
         toast.success("Project Created Sucessfully");
       } else {
@@ -87,6 +90,8 @@ export const ProjectsDashboard = () => {
       console.log(err);
     }
   };
+
+  console.log(des, "des");
 
   return (
     <div className='border dark:border-0 w-full '>
@@ -239,15 +244,12 @@ export const ProjectsDashboard = () => {
                   ref={editor}
                   type='text'
                   value={des}
-                  onChange={(e) => setDes(e && e.target && e.target.value)}
+                  onChange={handleEditorChange}
                   className='shadow-sm bg-lightCard border h-[80px] border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-slate-600 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                 />
               </div>
               <div>
-                <label
-                  for='shortDescription'
-                  className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                >
+                <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
                   Short Description (43 Characters for Project and 205 for blog
                   )
                 </label>
