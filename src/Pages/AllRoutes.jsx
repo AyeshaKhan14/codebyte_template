@@ -17,6 +17,7 @@ import { Profile } from "./Profile";
 import { Community } from "./Community";
 import { SingleComminity } from "../Components/Community/SingleComminity";
 import { ProjectSinglePage } from "./ProjectSinglePage";
+import { UserProfile } from "./UserProfile";
 
 export const AllRoutes = () => {
   const user = JSON.parse(localStorage.getItem("code-user")) || {};
@@ -34,11 +35,12 @@ export const AllRoutes = () => {
       <Route path='/portfolio-post' element={<PostPortfolio />} />
       <Route path='/dashboard' element={<DashBoard />} />
       <Route path={`/userprofile/${user?.email}`} element={<Profile />} />
+      <Route path='/user-profile/:id' element={<UserProfile />} />
       <Route path='/accountsettings' element={<Account />} />
       <Route path='/community' element={<Community />} />
       <Route path='/community/:id' element={<SingleComminity />} />
       <Route path='/projects/:id' element={<ProjectSinglePage />} />
-      <Route path={`projects/:search`} element={<Search />} />
+      <Route path={`/project/:search`} element={<Search />} />
     </Routes>
   );
 };

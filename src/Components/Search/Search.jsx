@@ -3,217 +3,103 @@ import dragAndDrop from "../../assests/React/dragAndDrop.png";
 import pricingPage from "../../assests/React/pricingPage.png";
 import cvMaker from "../../assests/React/cvMaker.png";
 import reactDashboard from "../../assests/React/reactDashboard.png";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 export const Search = () => {
   const { search } = useParams();
+  const [project, setProject] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
+  const getAllProjects = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/projects`
+      );
+      console.log(data.projects, "get");
+      setProject(data.projects);
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getAllProjects();
+  }, []);
+
+  const filterProjects = () => {
+    return project.filter((el) => {
+      // Check if any techStack item matches the search input
+      const hasMatchingTechStack = el.techStack.some((techStackItem) =>
+        techStackItem.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      return hasMatchingTechStack;
+    });
+  };
   console.log(search, "re");
 
   return (
-    <div>
-      <div class='bg-white bg-none dark:bg-midnightBlack dark:bg-hero-pattern dark:bg-cover'>
-        <div class='search'>
-          <div class='py-8 lg:py-16 px-4 mx-auto max-w-screen-md'>
-            <div class='lg:mb-16 mb-8 mx-auto text-center max-w-screen-sm  '>
-              <h2 class='mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl text-gray-950 dark:text-white'>
-                Templates Hub
-              </h2>
-              <p class='mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400'>
-                {" "}
-                Enhance your coding skills and expedite your development process
-                with ready-to-use templates in various programming languages.
-              </p>
-            </div>
-            <form>
-              <div class='flex'>
-                <label
-                  for='search-dropdown'
-                  class='mb-2 text-sm font-medium text-gray-950 sr-only dark:text-white'
-                >
-                  Your Email
-                </label>
-                <div class='relative w-full'>
-                  <input
-                    type='search'
-                    id='search-dropdown'
-                    class='block p-2.5 w-full z-20 text-sm text-gray-950 bg-lightCard rounded-lg  border border-gray-300  focus:outline-none dark:bg-darkCard dark:border-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white '
-                    placeholder='Search Next js, PHP, HTML Templates...'
-                    required=''
-                    value='react'
-                  />
-                  <button class='absolute top-2 right-4 text-black dark:text-white'>
-                    x
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class='border border-red-600 px-1 pt-4 md:px-8 flex justify-center flex-wrap gap-6'>
-          <div>
-            <a
-              className='block max-w-sm md:w-[450px] h-[450px] bg-white border border-gray-200 rounded-lg shadow hover:bg-lightCard dark:bg-darkCard dark:border-gray-700 dark:hover:bg-midnightBlack flex flex-col hover:scale-110 transition duration-700 ease-in-out'
-              href='/blogpost/implement-drag-and-drop-functionality-in-react-js'
-            >
-              <h2 className='mb-2 p-2 text-xl font-medium tracking-tight text-gray-950 dark:text-white text-center'>
-                Implement drag and drop Functionality in React js{" "}
-              </h2>
-              <p class='font-normal p-2 text-gray-500 text-center'>
-                Simple drag and drop feature in React js
-              </p>
-              <div class='flex items-center justify-center'>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  Reactjs
-                </div>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  javascript
-                </div>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  css
-                </div>
-              </div>
-              <div class='flex justify-center items-center mt-auto mb-0'>
-                <div class='overflow-hidden'>
-                  <img
-                    alt='Implement drag and drop Functionality in React js '
-                    loading='lazy'
-                    width='300'
-                    height='300'
-                    decoding='async'
-                    data-nimg='1'
-                    src={dragAndDrop}
-                    style={{ color: "transparent" }}
-                  />
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a
-              className='block max-w-sm md:w-[450px] h-[450px] bg-white border border-gray-200 rounded-lg shadow hover:bg-lightCard dark:bg-darkCard dark:border-gray-700 dark:hover:bg-midnightBlack flex flex-col hover:scale-110 transition duration-700 ease-in-out'
-              href='/blogpost/tailwind-and-react-dashboard-template-with-code-included'
-            >
-              <h2 class='mb-2 p-2 text-xl font-medium tracking-tight text-gray-950 dark:text-white text-center'>
-                Tailwind and React Dashboard Template with Code Included
-              </h2>
-              <p class='font-normal p-2 text-gray-500 text-center'>
-                dashboard created with tailwind and react
-              </p>
-              <div class='flex items-center justify-center'>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  Reactjs
-                </div>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  javascript
-                </div>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  tailwindcss
-                </div>
-              </div>
-              <div class='flex justify-center items-center mt-auto mb-0'>
-                <div class='overflow-hidden'>
-                  <img
-                    alt='Tailwind and React Dashboard Template with Code Included'
-                    loading='lazy'
-                    width='300'
-                    height='300'
-                    decoding='async'
-                    data-nimg='1'
-                    src={reactDashboard}
-                    style={{ color: "transparent" }}
-                  />
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a
-              class='block max-w-sm md:w-[450px] h-[450px] bg-white border border-gray-200 rounded-lg shadow hover:bg-lightCard dark:bg-darkCard dark:border-gray-700 dark:hover:bg-midnightBlack flex flex-col hover:scale-110 transition duration-700 ease-in-out'
-              href='/blogpost/pricing-page-with-slider-using-reactjs-tailwindcss'
-            >
-              <h2 class='mb-2 p-2 text-xl font-medium tracking-tight text-gray-950 dark:text-white text-center'>
-                Pricing Page With Slider Using React Js and Tailwind CSS{" "}
-              </h2>
-              <p class='font-normal p-2 text-gray-500 text-center'>
-                Pricing Page with a Slider using React JS{" "}
-              </p>
-              <div class='flex items-center justify-center'>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  Reactjs
-                </div>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  Tailwindcss
-                </div>
-              </div>
-              <div class='flex justify-center items-center mt-auto mb-0'>
-                <div class='overflow-hidden'>
-                  <img
-                    alt='Pricing Page With Slider Using React Js and Tailwind CSS '
-                    loading='lazy'
-                    width='300'
-                    height='300'
-                    decoding='async'
-                    data-nimg='1'
-                    src={pricingPage}
-                    style={{ color: "transparent" }}
-                  />
-                </div>
-              </div>
-            </a>
-          </div>
-          <div>
-            <a
-              class='block max-w-sm md:w-[450px] h-[450px] bg-white border border-gray-200 rounded-lg shadow hover:bg-lightCard dark:bg-darkCard dark:border-gray-700 dark:hover:bg-midnightBlack flex flex-col hover:scale-110 transition duration-700 ease-in-out'
-              href='/blogpost/cv-maker-website-reactjs-bootstrap'
-            >
-              <h2 class='mb-2 p-2 text-xl font-medium tracking-tight text-gray-950 dark:text-white text-center'>
-                CV Maker Website Using React js and Bootstrap
-              </h2>
-              <p class='font-normal p-2 text-gray-500 text-center'>
-                CV Maker Website in React js and Bootstrap
-              </p>
-              <div class='flex items-center justify-center'>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  Reactjs
-                </div>
-                <div class='mx-2 transition duration-700 delay-150 ease-in-out text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-pink-500'>
-                  Bootstrap
-                </div>
-              </div>
-              <div class='flex justify-center items-center mt-auto mb-0'>
-                <div class='overflow-hidden'>
-                  <img
-                    alt='CV Maker Website Using React js and Bootstrap'
-                    loading='lazy'
-                    width='300'
-                    height='300'
-                    decoding='async'
-                    data-nimg='1'
-                    src={cvMaker}
-                    style={{ color: "transparent" }}
-                  />
-                </div>
-              </div>
-            </a>
-          </div>
+    <div className='flex flex-col gap-6 w-full h-full'>
+      {/* ttitle div */}
+      <div className='flex flex-col gap-4 p-4'>
+        <div className='text-center w-[90%] md:w-[50%] m-auto flex flex-col gap-2'>
+          <h1 className='text-4xl md:text-5xl font-bold'>Templates Hub</h1>
+          <p className='text-lg text-gray-500'>
+            Enhance your coding skills and expedite your development process
+            with ready-to-use templates in various programming languages. Your
+            Email
+          </p>
         </div>
 
-        {/* pagination */}
-        <div class='flex justify-between p-3 md:pl-[80px] md:pr-[80px]'>
-          <button
-            class='bg-lightCard dark:bg-darkCard m-2 inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500  border border-gray-300 rounded-lg   dark:border-darkCard dark:text-gray-400 '
-            disabled=''
-          >
-            Previous
-          </button>
-          <button
-            class='bg-lightCard dark:bg-darkCard m-2 inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500  border border-gray-300 rounded-lg   dark:border-darkCard dark:text-gray-400 '
-            disabled=''
-          >
-            Next
-          </button>
+        <div className='w-[90%] md:w-[50%] m-auto flex items-center justify-center'>
+          <input
+            type='text'
+            placeholder='Search Next js,PHP'
+            value={search}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className='shadow-sm bg-lightCard rounded-md border border-gray-200 text-gray-950 text-sm block w-full p-2.5  focus:outline-none'
+          />
         </div>
+      </div>
+      {/* map div projects */}
+      <div className='w-[80%] m-auto grid grid-cols-1 md:grid-cols-3 gap-6'>
+        {filterProjects().map((el) => {
+          return (
+            <Link to={`/projects/${el._id}`}>
+              <div
+                className='border drop-shadow-2xl
+             rounded-md 
+            flex flex-col px-2 items-center justify-between gap-20 hover:scale-105 transition-transform duration-150'
+                key={el._id}
+              >
+                {/* content div */}
+                <div className='flex flex-col gap-2 p-2'>
+                  <h1 className='text-xl font-bold text-center'>
+                    {el.projectTitle}
+                  </h1>
+                  <p className='text-gray-400'>{el.shortDescription}</p>
+                  <div className='flex gap-2 items-center justify-center'>
+                    {el.techStack.map((ele) => (
+                      <p className='text-purple-500 text-lg'>{ele}</p>
+                    ))}
+                  </div>
+                </div>
+                {/* img div */}
+                <div className='h-[200px] w-[300px]'>
+                  <img
+                    className='h-full w-full'
+                    src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVGHL9r9OucwArH8yO3rEDPryG4V3tSCBw-w&usqp=CAU'
+                    alt=''
+                  />
+                </div>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

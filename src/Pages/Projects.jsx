@@ -6,6 +6,7 @@ import { Loading } from "../Components/Loading/Loading";
 export const Projects = () => {
   const [project, setProject] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   const getAllProjects = async () => {
     setLoading(true);
@@ -13,7 +14,7 @@ export const Projects = () => {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/projects`
       );
-      //console.log(data.projects, "get");
+      console.log(data.projects, "get");
       setProject(data.projects);
       setLoading(false);
     } catch (err) {
@@ -24,16 +25,50 @@ export const Projects = () => {
     getAllProjects();
   }, []);
 
+  const filterProjects = () => {
+    return project.filter((el) => {
+      // Check if any techStack item matches the search input
+      const hasMatchingTechStack = el.techStack.some((techStackItem) =>
+        techStackItem.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      return hasMatchingTechStack;
+    });
+  };
+
+  const sortedProjects = filterProjects()
+    .slice()
+    .sort((a, b) => b.createdAt - a.createdAt);
+
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <div className='border-2 border-black w-full h-full'>
-      <div>projects</div>
+    <div className='flex flex-col gap-6 w-full h-full'>
+      {/* ttitle div */}
+      <div className='flex flex-col gap-4 p-4'>
+        <div className='text-center w-[90%] md:w-[50%] m-auto flex flex-col gap-2'>
+          <h1 className='text-4xl md:text-5xl font-bold'>Templates Hub</h1>
+          <p className='text-lg text-gray-500'>
+            Enhance your coding skills and expedite your development process
+            with ready-to-use templates in various programming languages. Your
+            Email
+          </p>
+        </div>
+
+        <div className='w-[90%] md:w-[50%] m-auto flex items-center justify-center'>
+          <input
+            type='text'
+            placeholder='Search Next js,PHP'
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className='shadow-sm bg-lightCard rounded-md border border-gray-200 text-gray-950 text-sm block w-full p-2.5  focus:outline-none'
+          />
+        </div>
+      </div>
       {/* map div projects */}
       <div className='w-[80%] m-auto grid grid-cols-1 md:grid-cols-3 gap-6'>
-        {project.map((el) => {
+        {sortedProjects.map((el) => {
           return (
             <Link to={`/projects/${el._id}`}>
               <div

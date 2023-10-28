@@ -2,8 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AiOutlineStar } from "react-icons/ai";
+import { Loading } from "../Components/Loading/Loading";
 
 export const ProjectSinglePage = () => {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export const ProjectSinglePage = () => {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/projects/${id}`
       );
-      console.log(data.project, "sin");
+      // console.log(data.project, "sin");
       setSingleData(data.project);
       setLoading(false);
     } catch (err) {
@@ -26,6 +27,10 @@ export const ProjectSinglePage = () => {
   useEffect(() => {
     getSingleProject();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className='dark:bg-midnightBlack dark:text-white'>
@@ -66,9 +71,12 @@ export const ProjectSinglePage = () => {
                 <p>time</p>
               </div>
             </div>
-            <p className=' text-pink-400 font-bold font-sans'>
-              Visit User Profile
-            </p>
+            <Link to={`/user-profile/${singleData?.author?._id}`}>
+              {" "}
+              <p className=' text-pink-400 font-bold font-sans'>
+                Visit User Profile
+              </p>
+            </Link>
           </div>
 
           {/* title */}

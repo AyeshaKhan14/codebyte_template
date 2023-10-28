@@ -6,49 +6,49 @@ export const Nav2 = () => {
     <div className='h-[40px] w-full bg-[#2F1CA6] text-white flex items-center'>
       <div className='hidden w-[80%] m-auto md:flex justify-between font-sans font-medium text-sm'>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/react`}>REACT JS</Link>
+          <Link to={`project/react`}>REACT JS</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/javascript`}>JAVASCRIPT</Link>
+          <Link to={`project/javascript`}>JAVASCRIPT</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/jquery`}>jQUERY</Link>
+          <Link to={`project/jquery`}>jQUERY</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/php`}>PHP</Link>
+          <Link to={`project/php`}>PHP</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/html`}>HTML</Link>
+          <Link to={`project/html`}>HTML</Link>
         </div>
         <div className='hidden md:block hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/bootstrap`}>BOOTSTRAP</Link>
+          <Link to={`project/bootstrap`}>BOOTSTRAP</Link>
         </div>
         <div className='hidden md:block hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/tailwind css`}> TAILWIND CSS</Link>
+          <Link to={`project/tailwind css`}> TAILWIND CSS</Link>
         </div>
         <div className='hidden md:block hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/css`}> CSS</Link>
+          <Link to={`project/css`}> CSS</Link>
         </div>
         <div className='hidden md:block hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/wordpress`}> WORDPRESS</Link>
+          <Link to={`project/wordpress`}> WORDPRESS</Link>
         </div>
       </div>
       {/* responsive */}
       <div className='flex w-full justify-around font-sans font-medium text-xs md:hidden'>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/react`}>REACT JS</Link>
+          <Link to={`project/react`}>REACT JS</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/javascript`}>JAVASCRIPT</Link>
+          <Link to={`project/javascript`}>JAVASCRIPT</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/jquery`}>jQUERY</Link>
+          <Link to={`project/jquery`}>jQUERY</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/php`}>PHP</Link>
+          <Link to={`project/php`}>PHP</Link>
         </div>
         <div className='hover:underline underline-offset-2 scale-105'>
-          <Link to={`projects/html`}>HTML</Link>
+          <Link to={`project/html`}>HTML</Link>
         </div>
       </div>
     </div>

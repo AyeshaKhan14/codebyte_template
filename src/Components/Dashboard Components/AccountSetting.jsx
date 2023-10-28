@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 const AccountSetting = () => {
   const [isPasswordFormVisible, setPasswordFormVisible] = useState(false);
@@ -6,20 +8,21 @@ const AccountSetting = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [socialInfo, setSocialInfo] = useState({
-    facebook: "",
-    instagram: "",
-    youtube: "",
-    linkedin: "",
-    github: "",
-  });
+  const user = JSON.parse(localStorage.getItem("code-user")) || {};
+
+  // social media states
+  const [Facebook, setFacebook] = useState("");
+  const [Instagram, setInstagram] = useState("");
+  const [Twitter, setTwitter] = useState("");
+  const [LinkedIn, setLinkedIn] = useState("");
+  const [Github, setGithub] = useState("");
+  const [Youtube, setYouTube] = useState("");
 
   // Profile states
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [userDescription, setUserDescription] = useState("");
+  const [intro, setIntro] = useState("");
+  const token = JSON.parse(localStorage.getItem("code-token")) || null;
 
   const togglePasswordForm = () => {
     setPasswordFormVisible(!isPasswordFormVisible);
@@ -46,20 +49,90 @@ const AccountSetting = () => {
     setPasswordFormVisible(false);
   };
 
-  const handleSocialInfoUpdate = (e) => {
+  const handleSocialInfoUpdate = async (e) => {
     e.preventDefault();
     //  social media info update logic here
-    console.log("Updating social info:", socialInfo);
+    let socials = [];
 
-    // Clear input fields and hide the form
-    setSocialInfo({
-      facebook: "",
-      instagram: "",
-      youtube: "",
-      linkedin: "",
-      github: "",
-    });
+    if (Facebook) {
+      socials.push({
+        name: "Facebook",
+        link: Facebook,
+      });
+    }
+    if (Twitter) {
+      socials.push({
+        name: "Twitter",
+        link: Twitter,
+      });
+    }
+    if (LinkedIn) {
+      socials.push({
+        name: "LinkedIn",
+        link: LinkedIn,
+      });
+    }
+    if (Youtube) {
+      socials.push({
+        name: "YouTube",
+        link: Youtube,
+      });
+    }
+    if (Instagram) {
+      socials.push({
+        name: "Instagram",
+        link: Instagram,
+      });
+    }
+    if (Github) {
+      socials.push({
+        name: "GitHub",
+        link: Github,
+      });
+    }
+    if (socials.length === 0) {
+      toast.error("At least one social media link is required.");
+      return;
+    }
+
+    const { data } = await axios.patch(
+      `${process.env.REACT_APP_BASE_URL}/u/socials`,
+      { socials },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+        },
+      }
+    );
+    if (data.success === true) {
+      toast.success("Social Link Updated");
+    }
     setSocialInfoVisible(false);
+  };
+
+  const handleProfile = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/u/update`,
+        {
+          name: name,
+          phone: phoneNumber,
+          introduction: intro,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+          },
+        }
+      );
+      console.log(data, "pp");
+      if (data.success === true) {
+        toast.success("Profile Updated");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -72,35 +145,18 @@ const AccountSetting = () => {
                 Profile
               </h2>
               <hr className='h-px  bg-gray-200 dark:bg-gray-700 border-0  '></hr>
-              <form action=''>
+              {/* profile update form */}
+              <form onSubmit={handleProfile}>
                 <div className='md:p-5 p-3'>
                   <div className='my-2 md:flex'>
-                    <div className='md:mr-3 md:w-1/2 w-full mb-4'>
-                      <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
-                        First Name
-                      </label>
+                    <div className='w-full mb-4 flex flex-col gap-2'>
+                      <label className='font-medium font-sans'>Username</label>
                       <input
-                        name='firstName'
                         type='text'
-                        id='firstName'
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder='Johe Doh'
                         className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
-                        placeholder='Ayesha'
-                      />
-                    </div>
-                    <div className='md:mr-3 md:w-1/2 w-full mb-4'>
-                      <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
-                        Last Name
-                      </label>
-                      <input
-                        name='lastName'
-                        type='text'
-                        id='lastName'
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
-                        placeholder='Khan'
                       />
                     </div>
                   </div>
@@ -111,7 +167,8 @@ const AccountSetting = () => {
                       </label>
                       <input
                         className='bg-white border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-midnightBlack dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  focus:outline-none'
-                        placeholder='tofosa2228@gronasu.com'
+                        placeholder={user?.email}
+                        disabled
                       />
                     </div>
                     <div className='md:mr-3 md:w-1/2 w-full mb-4'>
@@ -129,18 +186,14 @@ const AccountSetting = () => {
                     </div>
                   </div>
                   <div className='w-full mb-4'>
-                    <label
-                      htmlFor='userDescription'
-                      className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'
-                    >
+                    <label className='block mb-2 text-sm font-medium text-gray-950 dark:text-white'>
                       One Line Introduction
                     </label>
                     <input
                       name='userDescription'
                       type='text'
-                      id='userDescription'
-                      value={userDescription}
-                      onChange={(e) => setUserDescription(e.target.value)}
+                      value={intro}
+                      onChange={(e) => setIntro(e.target.value)}
                       className='shadow-sm bg-lightCard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                       placeholder='Web Developer'
                     />
@@ -171,6 +224,7 @@ const AccountSetting = () => {
                   {isPasswordFormVisible ? "Cancel" : "Update Password"}
                 </button>
               </div>
+              {/* update password form */}
               {isPasswordFormVisible && (
                 <form className='p-4 ' onSubmit={handlePasswordUpdate}>
                   <div className='mb-2 md:flex'>
@@ -228,18 +282,14 @@ const AccountSetting = () => {
                   {isSocialInfoVisible ? "Cancel" : "Add Social Info"}
                 </button>
               </div>
+              {/* social media form */}
               {isSocialInfoVisible && (
                 <form className='p-4 ' onSubmit={handleSocialInfoUpdate}>
                   <div className='mb-2'>
                     <input
                       type='text'
-                      value={socialInfo.facebook}
-                      onChange={(e) =>
-                        setSocialInfo({
-                          ...socialInfo,
-                          facebook: e.target.value,
-                        })
-                      }
+                      value={Facebook}
+                      onChange={(e) => setFacebook(e.target.value)}
                       placeholder='Facebook URL'
                       className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
@@ -247,13 +297,8 @@ const AccountSetting = () => {
                   <div className='mb-2'>
                     <input
                       type='text'
-                      value={socialInfo.instagram}
-                      onChange={(e) =>
-                        setSocialInfo({
-                          ...socialInfo,
-                          instagram: e.target.value,
-                        })
-                      }
+                      value={Instagram}
+                      onChange={(e) => setInstagram(e.target.value)}
                       placeholder='Instagram URL'
                       className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
@@ -261,13 +306,17 @@ const AccountSetting = () => {
                   <div className='mb-2'>
                     <input
                       type='text'
-                      value={socialInfo.youtube}
-                      onChange={(e) =>
-                        setSocialInfo({
-                          ...socialInfo,
-                          youtube: e.target.value,
-                        })
-                      }
+                      value={Twitter}
+                      onChange={(e) => setTwitter(e.target.value)}
+                      placeholder='Twitter URL'
+                      className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
+                    />
+                  </div>
+                  <div className='mb-2'>
+                    <input
+                      type='text'
+                      value={Youtube}
+                      onChange={(e) => setYouTube(e.target.value)}
                       placeholder='YouTube URL'
                       className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
@@ -275,13 +324,8 @@ const AccountSetting = () => {
                   <div className='mb-2'>
                     <input
                       type='text'
-                      value={socialInfo.linkedin}
-                      onChange={(e) =>
-                        setSocialInfo({
-                          ...socialInfo,
-                          linkedin: e.target.value,
-                        })
-                      }
+                      value={LinkedIn}
+                      onChange={(e) => setLinkedIn(e.target.value)}
                       placeholder='LinkedIn URL'
                       className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
@@ -289,10 +333,8 @@ const AccountSetting = () => {
                   <div className='mb-2'>
                     <input
                       type='text'
-                      value={socialInfo.github}
-                      onChange={(e) =>
-                        setSocialInfo({ ...socialInfo, github: e.target.value })
-                      }
+                      value={Github}
+                      onChange={(e) => setGithub(e.target.value)}
                       placeholder='GitHub URL'
                       className='shadow-sm bg-lightcard border border-gray-200 text-gray-950 text-sm rounded-lg block w-full p-2.5 dark:bg-darkCard dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none'
                     />
