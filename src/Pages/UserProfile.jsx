@@ -9,6 +9,7 @@ import {
   BsLinkedin,
   BsInstagram,
 } from "react-icons/bs";
+import { toast } from "react-toastify";
 
 export const UserProfile = () => {
   const [protog, setProTog] = useState(true);
@@ -33,6 +34,25 @@ export const UserProfile = () => {
       console.log(data.user, "det");
       setUserDetail(data.user);
       setLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const hadlePostFollow = async () => {
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/u/follow/${userDetail?._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+          },
+        }
+      );
+      if (data.success === true) {
+        // toast.success("Social Link Updated");
+        getUser();
+      }
     } catch (err) {
       console.log(err);
     }
@@ -89,7 +109,10 @@ export const UserProfile = () => {
             <button className='border p-2 font-medium px-4 rounded-md'>
               View Portfolio
             </button>
-            <button className=' text-zinc-100 bg-gradient-to-r from-[#2F1CA6] to-blue-500 hover:from-pink-500 hover:to-yellow-500 p-2 font-medium px-4 rounded-md'>
+            <button
+              onClick={hadlePostFollow}
+              className=' text-zinc-100 bg-gradient-to-r from-[#2F1CA6] to-blue-500 hover:from-pink-500 hover:to-yellow-500 p-2 font-medium px-4 rounded-md'
+            >
               + Follow
             </button>
           </div>
