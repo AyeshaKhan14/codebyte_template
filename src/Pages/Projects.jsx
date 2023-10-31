@@ -44,7 +44,7 @@ export const Projects = () => {
   }
 
   return (
-    <div className='flex flex-col gap-6 w-full h-full'>
+    <div className='dark:bg-midnightBlack dark:text-white flex flex-col gap-6 w-full h-full'>
       {/* ttitle div */}
       <div className='flex flex-col gap-4 p-4'>
         <div className='text-center w-[90%] md:w-[50%] m-auto flex flex-col gap-2'>
@@ -62,7 +62,7 @@ export const Projects = () => {
             placeholder='Search Next js,PHP'
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            className='shadow-sm bg-lightCard rounded-md border border-gray-200 text-gray-950 text-sm block w-full p-2.5  focus:outline-none'
+            className='shadow-sm bg-lightCard dark:bg-slate-900 dark:border-0 dark:text-zinc-100 rounded-md border border-gray-200 text-gray-950 text-sm block w-full p-2.5  focus:outline-none'
           />
         </div>
       </div>
