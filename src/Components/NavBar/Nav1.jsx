@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
-import Typed from "react-typed";
-import { MdOutlineLightMode, MdOutlineNightlightRound } from "react-icons/md";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { clearAuth, clearToken } from "../../Redux/slices/user.slice";
-import { toast } from "react-toastify";
+import { useEffect, useState } from 'react';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
+import Typed from 'react-typed';
+import { MdOutlineLightMode, MdOutlineNightlightRound } from 'react-icons/md';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { clearAuth, clearToken } from '../../Redux/slices/user.slice';
+import { toast } from 'react-toastify';
 
 export const Nav1 = () => {
   const [nav, setNav] = useState(false);
   const navigate = useNavigate();
   const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "light"
+    () => localStorage.getItem('theme') || 'light'
   );
   const dispatch = useDispatch();
-  const token = JSON.parse(localStorage.getItem("code-token")) || "";
+  const token = JSON.parse(localStorage.getItem('code-token')) || '';
 
   const handleLogOut = async () => {
     // Handle Logout
@@ -24,10 +24,11 @@ export const Nav1 = () => {
       await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/logout`);
 
       // clearing the LocalStorage:
-      localStorage.removeItem("code-token");
-      localStorage.removeItem("code-user");
+      localStorage.removeItem('code-token');
+      localStorage.removeItem('code-user');
+      localStorage.removeItem('token');
 
-      navigate("/");
+      navigate('/');
 
       // Clearing the user Info from redux:
       dispatch(clearToken());
@@ -35,7 +36,7 @@ export const Nav1 = () => {
       window.location.reload();
 
       // Toast:
-      toast.success("Logged out successfully");
+      toast.success('Logged out successfully');
     } catch (error) {
       toast.error(error.message);
     }
@@ -45,25 +46,25 @@ export const Nav1 = () => {
     setNav(!nav);
   };
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   const handleThemeSwitch = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
+    localStorage.setItem('theme', newTheme);
   };
 
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedTheme = localStorage.getItem("theme");
+      const storedTheme = localStorage.getItem('theme');
       if (storedTheme && storedTheme !== theme) {
         setTheme(storedTheme);
       }
     };
 
-    window.addEventListener("storage", handleStorageChange);
-    return () => window.removeEventListener("storage", handleStorageChange);
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, [theme]);
 
   return (
@@ -74,7 +75,7 @@ export const Nav1 = () => {
           <div>
             <Typed
               className='text-xl md:text-2xl lg:text-xl text-[#2F1CA6] font-bold md:pl-4 pl-2'
-              strings={["codebyte"]}
+              strings={['codebyte']}
               typeSpeed={120}
               backSpeed={140}
               loop
@@ -91,7 +92,7 @@ export const Nav1 = () => {
                 <div className='hover:text-[#FA383E]'>About</div>
               </Link>
               <Link to='/projects'>
-                {" "}
+                {' '}
                 <div className='hover:text-[#FA383E]'>Projects</div>
               </Link>
               <Link to='/portfolio'>
@@ -101,16 +102,16 @@ export const Nav1 = () => {
                 <div className='hover:text-[#FA383E]'>Contact</div>
               </Link>
               <Link to='/blog'>
-                {" "}
+                {' '}
                 <div className='hover:text-[#FA383E]'>Blog</div>
               </Link>
 
               {/* auth */}
               {token ? (
                 <>
-                  {" "}
+                  {' '}
                   <Link to='/community'>
-                    {" "}
+                    {' '}
                     <div className='hover:text-[#FA383E]'>Community</div>
                   </Link>
                   <div
@@ -122,7 +123,7 @@ export const Nav1 = () => {
                 </>
               ) : (
                 <>
-                  {" "}
+                  {' '}
                   <Link to='/login'>
                     <div className='p-2 bg-[#FA383E] py-2 text-white rounded-md'>
                       Login
@@ -140,7 +141,7 @@ export const Nav1 = () => {
                 className=' dark:bg-slate-900 p-1 flex items-center cursor-pointer bg-yellow-400 justify-center rounded-full'
                 onClick={handleThemeSwitch}
               >
-                {theme === "light" ? (
+                {theme === 'light' ? (
                   <MdOutlineLightMode className='text-2xl' />
                 ) : (
                   <MdOutlineNightlightRound className='text-2xl text-slate-500' />
@@ -180,9 +181,9 @@ export const Nav1 = () => {
             {/* auth */}
             {token ? (
               <>
-                {" "}
+                {' '}
                 <Link to='/community'>
-                  {" "}
+                  {' '}
                   <div className='hover:text-[#FA383E]'>Community</div>
                 </Link>
                 <div
@@ -194,7 +195,7 @@ export const Nav1 = () => {
               </>
             ) : (
               <>
-                {" "}
+                {' '}
                 <Link to='/login'>
                   <div className='p-2 bg-[#FA383E] py-2 text-white rounded-md'>
                     Login
@@ -211,7 +212,7 @@ export const Nav1 = () => {
               className=' dark:bg-slate-900 p-1 flex items-center cursor-pointer bg-yellow-400 justify-center rounded-full'
               onClick={handleThemeSwitch}
             >
-              {theme === "light" ? (
+              {theme === 'light' ? (
                 <MdOutlineLightMode className='text-2xl' />
               ) : (
                 <MdOutlineNightlightRound className='text-2xl text-slate-500' />

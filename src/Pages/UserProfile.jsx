@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import {
   BsFacebook,
   BsTwitter,
@@ -8,14 +8,14 @@ import {
   BsYoutube,
   BsLinkedin,
   BsInstagram,
-} from "react-icons/bs";
-import { toast } from "react-toastify";
+} from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
 export const UserProfile = () => {
   const [protog, setProTog] = useState(true);
   const [blgtog, setBlgTog] = useState(false);
   const [userDetail, setUserDetail] = useState({});
-  const token = JSON.parse(localStorage.getItem("code-token")) || null;
+  const token = JSON.parse(localStorage.getItem('code-token')) || null;
   const { id } = useParams();
   const [userPro, setUserPro] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ export const UserProfile = () => {
           },
         }
       );
-      console.log(data.user, "det");
+      console.log(data.user, 'det');
       setUserDetail(data.user);
       setLoading(false);
     } catch (err) {
@@ -39,18 +39,21 @@ export const UserProfile = () => {
     }
   };
 
-  const hadlePostFollow = async () => {
+  const handlePostFollow = async () => {
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/u/follow/${userDetail?._id}`,
+        {},
         {
           headers: {
-            Authorization: `Bearer ${token}`, // Add the Authorization header with the token
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
-      if (data.success === true) {
-        // toast.success("Social Link Updated");
+      if (!data.success) {
+        toast.warning(data.message);
+      } else {
+        toast.success(data.message);
         getUser();
       }
     } catch (err) {
@@ -71,10 +74,7 @@ export const UserProfile = () => {
       console.log(err);
     }
   };
-  useEffect(() => {
-    geUserProject();
-    getUser();
-  }, []);
+
   const handleTog = () => {
     setProTog(true);
     setBlgTog(false);
@@ -85,6 +85,11 @@ export const UserProfile = () => {
     setProTog(false);
   };
 
+  useEffect(() => {
+    geUserProject();
+    getUser();
+  }, []);
+
   return (
     <div className=' dark:bg-midnightBlack dark:text-white w-full h-full'>
       <div className='w-[95%] p-4 m-auto flex flex-col gap-4'>
@@ -94,10 +99,10 @@ export const UserProfile = () => {
             <div className='h-[70px] w-[70px] md:h-[100px] md:w-[100px] text-xl text-zinc-100 bg-gradient-to-r from-[#2F1CA6] to-blue-500 flex items-center justify-center rounded-full'>
               {userDetail?.name
                 ? userDetail.name
-                    .split(" ")
+                    .split(' ')
                     .map((word) => word.charAt(0).toUpperCase())
-                    .join("")
-                : ""}
+                    .join('')
+                : ''}
             </div>
             <div>
               <h2 className='text-xl font-bold'>{userDetail?.name}</h2>
@@ -110,7 +115,7 @@ export const UserProfile = () => {
               View Portfolio
             </button>
             <button
-              onClick={hadlePostFollow}
+              onClick={handlePostFollow}
               className=' text-zinc-100 bg-gradient-to-r from-[#2F1CA6] to-blue-500 hover:from-pink-500 hover:to-yellow-500 p-2 font-medium px-4 rounded-md'
             >
               + Follow
@@ -122,7 +127,7 @@ export const UserProfile = () => {
         <div className='flex flex-col gap-2 md:flex-row items-start justify-start md:justify-between'>
           <div>
             {userDetail?.socials?.length === 0 ? (
-              ""
+              ''
             ) : (
               <div className='flex justify-between gap-1'>
                 {userDetail?.socials?.map((el, i) => {
@@ -130,68 +135,68 @@ export const UserProfile = () => {
                     <div className='flex justify-start'>
                       {/* fb-div */}
                       <div>
-                        {el.name === "Facebook" ? (
+                        {el.name === 'Facebook' ? (
                           <BsFacebook
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-700 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* twitter-div */}
                       <div>
-                        {el.name === "Twitter" ? (
+                        {el.name === 'Twitter' ? (
                           <BsTwitter
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-700 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* github-div */}
                       <div>
-                        {el.name === "Github" ? (
+                        {el.name === 'Github' ? (
                           <BsGithub
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-black md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* youtube-div */}
                       <div>
-                        {el.name === "YouTube" ? (
+                        {el.name === 'YouTube' ? (
                           <BsYoutube
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-red-500 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* Linkendin-div */}
                       <div>
-                        {el.name === "LinkedIn" ? (
+                        {el.name === 'LinkedIn' ? (
                           <BsLinkedin
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-500 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* instagram-div */}
                       <div>
-                        {el.name === "Instagram" ? (
+                        {el.name === 'Instagram' ? (
                           <BsInstagram
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-500 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                     </div>

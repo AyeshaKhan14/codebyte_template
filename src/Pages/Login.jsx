@@ -1,13 +1,13 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setToken, setUser } from "../Redux/slices/user.slice";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setToken, setUser } from '../Redux/slices/user.slice';
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,13 +16,13 @@ export const Login = () => {
     setLoading(true);
     try {
       if (!email || !password) {
-        toast.error("Please fill in all the fields");
+        toast.error('Please fill in all the fields');
         setLoading(false);
         return;
       }
 
       if (password.length < 8) {
-        toast.error("Password must be at least 8 characters");
+        toast.error('Password must be at least 8 characters');
         setLoading(false);
         return;
       }
@@ -34,20 +34,20 @@ export const Login = () => {
           password: password,
         }
       );
-      //console.log(data);
-      if (data.message === "User not found! Please register") {
-        toast.error("User not Exists, plz register");
+      if (data.message === 'User not found! Please register') {
+        toast.error('User not Exists, plz register');
         setLoading(false);
-      } else if (data.message === "Invalid credentials") {
+      } else if (data.message === 'Invalid credentials') {
         toast.error(data.message);
         setLoading(false);
       } else {
-        window.localStorage.setItem("code-token", JSON.stringify(data.token));
-        window.localStorage.setItem("code-user", JSON.stringify(data.user));
+        window.localStorage.setItem('code-token', JSON.stringify(data.token));
+        localStorage.setItem('token', data.token);
+        window.localStorage.setItem('code-user', JSON.stringify(data.user));
         dispatch(setToken(data.token));
         dispatch(setUser(data.user));
-        toast.success("Login Sucessfully");
-        navigate("/");
+        toast.success('Login Sucessfully');
+        navigate('/');
         setLoading(false);
       }
     } catch (err) {

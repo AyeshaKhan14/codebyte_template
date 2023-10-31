@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import {
   BsFacebook,
   BsTwitter,
@@ -8,8 +8,9 @@ import {
   BsYoutube,
   BsLinkedin,
   BsInstagram,
-} from "react-icons/bs";
-import { Link } from "react-router-dom";
+} from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const Profile = () => {
   const [protog, setProTog] = useState(true);
@@ -17,8 +18,9 @@ export const Profile = () => {
   const [userDetail, setUserDetail] = useState({});
   const [loading, setLoading] = useState(false);
   const [userPro, setUserPro] = useState([]);
-  const user = JSON.parse(localStorage.getItem("code-user")) || {};
-  const token = JSON.parse(localStorage.getItem("code-token")) || null;
+  const user = JSON.parse(localStorage.getItem('code-user')) || {};
+  const token = JSON.parse(localStorage.getItem('code-token')) || null;
+
   const handleTog = () => {
     setProTog(!protog);
     setBlgTog(false);
@@ -74,10 +76,10 @@ export const Profile = () => {
             <div className='h-[70px] w-[70px] md:h-[100px] md:w-[100px] text-xl text-zinc-100 bg-gradient-to-r from-[#2F1CA6] to-blue-500 flex items-center justify-center rounded-full'>
               {userDetail?.name
                 ? userDetail.name
-                    .split(" ")
+                    .split(' ')
                     .map((word) => word.charAt(0).toUpperCase())
-                    .join("")
-                : ""}
+                    .join('')
+                : ''}
             </div>
             <div>
               <h2 className='text-xl font-bold'>{userDetail?.name}</h2>
@@ -97,7 +99,7 @@ export const Profile = () => {
         <div className='flex flex-col gap-2 md:flex-row items-start justify-start md:justify-between'>
           <div>
             {userDetail?.socials?.length === 0 ? (
-              ""
+              ''
             ) : (
               <div className='flex gap-1 justify-between '>
                 {userDetail?.socials?.map((el, i) => {
@@ -105,68 +107,68 @@ export const Profile = () => {
                     <div className='flex justify-start'>
                       {/* fb-div */}
                       <div>
-                        {el.name === "Facebook" ? (
+                        {el.name === 'Facebook' ? (
                           <BsFacebook
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-700 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* twitter-div */}
                       <div>
-                        {el.name === "Twitter" ? (
+                        {el.name === 'Twitter' ? (
                           <BsTwitter
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-700 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* github-div */}
                       <div>
-                        {el.name === "Github" ? (
+                        {el.name === 'Github' ? (
                           <BsGithub
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-black md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* youtube-div */}
                       <div>
-                        {el.name === "YouTube" ? (
+                        {el.name === 'YouTube' ? (
                           <BsYoutube
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-red-500 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* Linkendin-div */}
                       <div>
-                        {el.name === "LinkedIn" ? (
+                        {el.name === 'LinkedIn' ? (
                           <BsLinkedin
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-blue-500 md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                       {/* instagram-div */}
                       <div>
-                        {el.name === "Instagram" ? (
+                        {el.name === 'Instagram' ? (
                           <BsInstagram
                             onClick={() => window.open(el.link)}
                             className='font-bold cursor-pointer text-[#feda75] md:text-3xl'
                           />
                         ) : (
-                          ""
+                          ''
                         )}
                       </div>
                     </div>
