@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Loading } from "../Components/Loading/Loading";
+import { Link } from "react-router-dom";
 export const Blog = () => {
   const [blog, setBlog] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -114,7 +115,7 @@ export const Blog = () => {
                         class='inline-flex items-center font-medium text-blue-500 hover:underline'
                         href='/blogpost/earn-money-with-coding-templates-on-snipbyte'
                       >
-                        Read more
+                        <Link to={`/blog/${el._id}`}> Read more</Link>
                         <svg
                           class='ml-2 w-4 h-4'
                           fill='currentColor'
