@@ -14,7 +14,7 @@ export const Projects = () => {
       const { data } = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/projects`
       );
-      console.log(data.projects, "get");
+      //console.log(data.projects, "get");
       setProject(data.projects);
       setLoading(false);
     } catch (err) {

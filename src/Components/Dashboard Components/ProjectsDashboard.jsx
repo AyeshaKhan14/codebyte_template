@@ -80,7 +80,7 @@ export const ProjectsDashboard = () => {
           },
         }
       );
-      console.log(data.project, "project-done");
+      // console.log(data.project, "project-done");
       if (data.project) {
         toast.success("Project Created Sucessfully");
       } else {
@@ -90,8 +90,6 @@ export const ProjectsDashboard = () => {
       console.log(err);
     }
   };
-
-  console.log(des, "des");
 
   return (
     <div className='border dark:border-0 w-full '>
