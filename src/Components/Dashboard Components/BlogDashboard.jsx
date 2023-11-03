@@ -25,8 +25,13 @@ export const BlogDashboard = () => {
         title: title,
         content: content,
       };
+      const token = JSON.parse(localStorage.getItem("code-token")) || null;
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/posts`, payload)
+        .post(`${process.env.REACT_APP_BASE_URL}/posts`, payload, { headers })
         .then((res) => {
           if (res.data.message === "Post created successfully") {
             toast.success(res.data.message);
