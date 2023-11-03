@@ -1,28 +1,28 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const AccountSetting = () => {
   const [isPasswordFormVisible, setPasswordFormVisible] = useState(false);
   const [isSocialInfoVisible, setSocialInfoVisible] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const user = JSON.parse(localStorage.getItem("code-user")) || {};
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const user = JSON.parse(localStorage.getItem('code-user')) || {};
 
   // social media states
-  const [Facebook, setFacebook] = useState("");
-  const [Instagram, setInstagram] = useState("");
-  const [Twitter, setTwitter] = useState("");
-  const [LinkedIn, setLinkedIn] = useState("");
-  const [Github, setGithub] = useState("");
-  const [Youtube, setYouTube] = useState("");
+  const [Facebook, setFacebook] = useState('');
+  const [Instagram, setInstagram] = useState('');
+  const [Twitter, setTwitter] = useState('');
+  const [LinkedIn, setLinkedIn] = useState('');
+  const [Github, setGithub] = useState('');
+  const [Youtube, setYouTube] = useState('');
 
   // Profile states
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [intro, setIntro] = useState("");
-  const token = JSON.parse(localStorage.getItem("code-token")) || null;
+  const [name, setName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [intro, setIntro] = useState('');
+  const token = JSON.parse(localStorage.getItem('code-token')) || null;
 
   const togglePasswordForm = () => {
     setPasswordFormVisible(!isPasswordFormVisible);
@@ -32,21 +32,38 @@ const AccountSetting = () => {
     setSocialInfoVisible(!isSocialInfoVisible);
   };
 
-  const handlePasswordUpdate = (e) => {
+  const handlePasswordUpdate = async (e) => {
     e.preventDefault();
-    //  password update logic
-    console.log(
-      "Updating password:",
-      currentPassword,
-      newPassword,
-      confirmPassword
-    );
+    if (newPassword === confirmPassword) {
+      try {
+        const { data } = await axios.patch(
+          `${process.env.REACT_APP_BASE_URL}/auth/reset-password`,
+          {
+            currentPassword,
+            newPassword,
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+          }
+        );
+        if (data.success) {
+          toast.success(data.message);
+          console.log('Password updated successfully');
 
-    // Clear input fields and hide the form
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
-    setPasswordFormVisible(false);
+          // Clear input fields and hide the form
+          setCurrentPassword('');
+          setNewPassword('');
+          setConfirmPassword('');
+          setPasswordFormVisible(false);
+        }
+      } catch (error) {
+        console.log('Error updating password', error.message);
+      }
+    } else {
+      toast.warning('confirmPassword password is not same as New password');
+    }
   };
 
   const handleSocialInfoUpdate = async (e) => {
@@ -56,42 +73,42 @@ const AccountSetting = () => {
 
     if (Facebook) {
       socials.push({
-        name: "Facebook",
+        name: 'Facebook',
         link: Facebook,
       });
     }
     if (Twitter) {
       socials.push({
-        name: "Twitter",
+        name: 'Twitter',
         link: Twitter,
       });
     }
     if (LinkedIn) {
       socials.push({
-        name: "LinkedIn",
+        name: 'LinkedIn',
         link: LinkedIn,
       });
     }
     if (Youtube) {
       socials.push({
-        name: "YouTube",
+        name: 'YouTube',
         link: Youtube,
       });
     }
     if (Instagram) {
       socials.push({
-        name: "Instagram",
+        name: 'Instagram',
         link: Instagram,
       });
     }
     if (Github) {
       socials.push({
-        name: "GitHub",
+        name: 'GitHub',
         link: Github,
       });
     }
     if (socials.length === 0) {
-      toast.error("At least one social media link is required.");
+      toast.error('At least one social media link is required.');
       return;
     }
 
@@ -105,7 +122,7 @@ const AccountSetting = () => {
       }
     );
     if (data.success === true) {
-      toast.success("Social Link Updated");
+      toast.success('Social Link Updated');
     }
     setSocialInfoVisible(false);
   };
@@ -126,9 +143,9 @@ const AccountSetting = () => {
           },
         }
       );
-      console.log(data, "pp");
+      console.log(data, 'pp');
       if (data.success === true) {
-        toast.success("Profile Updated");
+        toast.success('Profile Updated');
       }
     } catch (err) {
       console.log(err);
@@ -221,7 +238,7 @@ const AccountSetting = () => {
                   onClick={togglePasswordForm}
                   className='py-3 px-5 text-sm font-medium text-center rounded-lg focus:outline-none text-white bg-indigo-500'
                 >
-                  {isPasswordFormVisible ? "Cancel" : "Update Password"}
+                  {isPasswordFormVisible ? 'Cancel' : 'Update Password'}
                 </button>
               </div>
               {/* update password form */}
@@ -279,7 +296,7 @@ const AccountSetting = () => {
                   onClick={toggleSocialInfoForm}
                   className='py-3 px-5 text-sm font-medium text-center rounded-lg focus:outline-none text-white bg-indigo-500'
                 >
-                  {isSocialInfoVisible ? "Cancel" : "Add Social Info"}
+                  {isSocialInfoVisible ? 'Cancel' : 'Add Social Info'}
                 </button>
               </div>
               {/* social media form */}
